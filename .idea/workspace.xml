@@ -1,11 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f05b445-d77c-459b-b6ed-4d867dd8e89e" name="Default Changelist" comment="" />
+    <list default="true" id="6f05b445-d77c-459b-b6ed-4d867dd8e89e" name="Default Changelist" comment="init">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/books_web_war.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_2_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson2_fastjson2_2_0_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_19_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_dbutils_commons_dbutils_1_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_29.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_9_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_9_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_9_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_9_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/controller/BaseServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/controller/UsersServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/BookCategoryDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/BooksDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/BorrowersDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/CategoriesDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/LoansDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/LogsDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/NotificationsDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/UsersDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/impl/UsersDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/dto/RegisterUserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/BookCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Books.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Borrowers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Categories.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Loans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Logs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Notifications.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Users.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/vo/LoginUserInfoVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/vo/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/BookCategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/BooksService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/BorrowersService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/CategoriesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/LoansService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/LogsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/NotificationsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/UsersService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/service/impl/UsersServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/utils/DruidUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/utils/EmailMatcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/utils/PasswordHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/webapp/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/webapp/500.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/webapp/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/webapp/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/books_web_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/books_web_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books-web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books-web/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/webapp/WEB-INF/web.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -17,14 +106,32 @@
     <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.27931035" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\books\books-web\src\main\java\com\library\pro\model\po" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\books" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -36,21 +143,56 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1684487604042</updated>
-      <workItem from="1684487608068" duration="40000" />
+      <workItem from="1684487608068" duration="8700000" />
     </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1684487767966</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684487767966</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="249" y="7" key="SettingsEditor" timestamp="1684487645872">
+    <state x="574" y="116" key="#com.intellij.ide.util.MemberChooser" timestamp="1684497560629">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="249" y="7" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1684487645872" />
+    <state x="574" y="116" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1684497560629" />
+    <state x="388" y="110" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1684487684236">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="388" y="110" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.864@0.0.1536.864" timestamp="1684487684236" />
+    <state x="249" y="7" key="SettingsEditor" timestamp="1684487978861">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="249" y="7" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1684487978861" />
     <state x="178" y="42" key="new project wizard" timestamp="1684487643325">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="178" y="42" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1684487643325" />
+    <state x="425" y="197" key="run.anything.popup" timestamp="1684496626370">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1684496626370" />
   </component>
 </project>
