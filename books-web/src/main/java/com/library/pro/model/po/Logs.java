@@ -28,6 +28,8 @@ public class Logs implements Serializable {
      */
     private String action;
 
+    private String description;
+
     /**
      * 时间戳
      */
@@ -65,12 +67,21 @@ public class Logs implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Logs{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", action='" + action + '\'' +
+                ", description='" + description + '\'' +
                 ", createTime=" + createTime +
                 '}';
     }

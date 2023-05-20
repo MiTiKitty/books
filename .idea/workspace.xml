@@ -28,78 +28,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f05b445-d77c-459b-b6ed-4d867dd8e89e" name="Default Changelist" comment="添加了首页页面">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/controller/BaseServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/controller/BaseServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/controller/UsersServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/controller/UsersServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/BookCategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/BookCategoryDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/BooksDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/BooksDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/BorrowersDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/BorrowersDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/CategoriesDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/CategoriesDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/LoansDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/LoansDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/LogsDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/LogsDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/NotificationsDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/NotificationsDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/UsersDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/UsersDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/impl/UsersDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/dao/impl/UsersDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/dto/RegisterUserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/dto/RegisterUserDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/BookCategory.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/BookCategory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Books.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Books.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Borrowers.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Borrowers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Categories.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Categories.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Loans.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Loans.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Logs.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Logs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Notifications.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Notifications.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/po/Users.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/vo/LoginUserInfoVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/vo/LoginUserInfoVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/vo/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/model/vo/Result.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/BookCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/BookCategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/BooksService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/BooksService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/BorrowersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/BorrowersService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/CategoriesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/CategoriesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/LoansService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/LoansService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/LogsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/LogsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/NotificationsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/NotificationsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/UsersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/UsersService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/impl/UsersServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/service/impl/UsersServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/utils/DruidUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/utils/DruidUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/utils/EmailMatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/utils/EmailMatcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/utils/PasswordHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/books-web-1.0-SNAPSHOT/WEB-INF/classes/com/library/pro/utils/PasswordHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/controller/BaseServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/controller/BaseServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/controller/UsersServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/controller/UsersServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/BookCategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/BookCategoryDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/BooksDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/BooksDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/BorrowersDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/BorrowersDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/CategoriesDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/CategoriesDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/LoansDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/LoansDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/LogsDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/LogsDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/NotificationsDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/NotificationsDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/UsersDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/UsersDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/impl/UsersDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/dao/impl/UsersDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/dto/RegisterUserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/dto/RegisterUserDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/BookCategory.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/BookCategory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Books.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Books.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Borrowers.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Borrowers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Categories.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Categories.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Loans.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Loans.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Logs.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Logs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Notifications.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Notifications.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/po/Users.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/vo/LoginUserInfoVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/vo/LoginUserInfoVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/vo/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/model/vo/Result.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/BookCategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/BookCategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/BooksService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/BooksService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/BorrowersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/BorrowersService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/CategoriesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/CategoriesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/LoansService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/LoansService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/LogsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/LogsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/NotificationsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/NotificationsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/UsersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/UsersService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/impl/UsersServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/service/impl/UsersServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/utils/DruidUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/utils/DruidUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/utils/EmailMatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/utils/EmailMatcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/utils/PasswordHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/target/classes/com/library/pro/utils/PasswordHelper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/impl/BooksDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/impl/LogsDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/BooksDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/BooksDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/LogsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/LogsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/UsersDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/UsersDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/impl/UsersDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/impl/UsersDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Logs.java" beforeDir="false" afterPath="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/model/po/Logs.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,21 +74,13 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/books-web/src/main/java/com/library/pro/dao/impl" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\books\books-web\webapp" />
@@ -269,6 +196,7 @@
       <workItem from="1684541685169" duration="10614000" />
       <workItem from="1684566318739" duration="4767000" />
       <workItem from="1684573470633" duration="1346000" />
+      <workItem from="1684596082736" duration="624000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1684487767966</created>
@@ -288,7 +216,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -300,6 +228,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />

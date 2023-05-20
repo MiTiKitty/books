@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * @className: UsersDao <br/>
  * @description: 用户dao接口 <br/>
- * @author: CatKitty 33641 <br/>
- * @date: 2023/05/19 <br/>
+ * @author: xh <br/>
+ * @date: 2023/05/20 <br/>
  * @version: 1.0.0 <br/>
  */
 public interface UsersDao {
@@ -42,7 +42,7 @@ public interface UsersDao {
     int deleteUserById(Integer id) throws SQLException;
 
     /**
-     * 根据id插好用户
+     * 根据id查询用户
      *
      * @param id
      *         id
