@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志管理</title>
+    <!--引入Bootstrap的CSS文件-->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!--引入jQuery的JS文件-->
+    <script src="./js/jquery.min.js"></script>
+    <!--引入Bootstrap的JS文件-->
+    <script src="./js/bootstarp.js"></script>
+    <!-- 引入EChart.js  -->
+    <script src="./js/echat.min.js"></script>
+    <style>
+        .bor {
+            border-bottom: 1px solid #3d3d3d;
+        }
+
+        .right-bor {
+            border-right: 1px solid #3d3d3d;
+            position: sticky;
+            top: 10px;
+            left: 0;
+        }
+
+        .active {
+            color: orange;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<!-- Top Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light bor">
+    <a class="navbar-brand" href="./home.html">biubiubiu——图书管理系统</a>
+</nav>
+<!-- Left Navigation Bar -->
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-1 d-none d-md-block bg-light sidebar right-bor">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./books.html">图书管理</a>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./category.html">分类管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./users.html">用户管理</a>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./notify.html">通知管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./loans.html">借阅管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./logs.html">日志管理</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Right Content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+        </main>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类管理</title>
+    <!--引入Bootstrap的CSS文件-->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!--引入jQuery的JS文件-->
+    <script src="./js/jquery.min.js"></script>
+    <!--引入Bootstrap的JS文件-->
+    <script src="./js/bootstarp.js"></script>
+    <!-- 引入EChart.js  -->
+    <script src="./js/echat.min.js"></script>
+    <script src="./js/category.js"></script>
+    <style>
+        .bor {
+            border-bottom: 1px solid #3d3d3d;
+        }
+
+        .right-bor {
+            border-right: 1px solid #3d3d3d;
+            position: sticky;
+            top: 10px;
+            left: 0;
+        }
+
+        .active {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .card {
+            padding: 10px;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .desc-text {
+            padding: 0 5px;
+            font-size: large;
+            font-weight: bold;
+            color: red;
+        }
+
+        .my-title {
+            text-align: center;
+            font-style: oblique;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<!-- Top Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light bor">
+    <a class="navbar-brand" href="./home.html">biubiubiu——图书管理系统</a>
+</nav>
+<!-- Left Navigation Bar -->
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-1 d-none d-md-block bg-light sidebar right-bor">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./books.html">图书管理</a>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="./category.html">分类管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./users.html">用户管理</a>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./notify.html">通知管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./loans.html">借阅管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./logs.html">日志管理</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Right Content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="row" style="margin: 15px;">
+                <div class="col-md-3">
+                    <button class="btn btn-primary" id="addCategoryBtn">添加分类</button>
+                </div>
+            </div>
+            <div class="row" id="categoryListRow">
+            </div>
+        </main>
+    </div>
+    <div class="modal fade" id="addModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">添加分类</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="categoryName" class="col-form-label">分类名称:</label>
+                            <input type="text" class="form-control" id="categoryName">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="addSaveBtn" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="resetAForm()">关闭
+                    </button> <!-- modified -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
