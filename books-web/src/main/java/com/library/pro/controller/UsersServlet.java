@@ -18,22 +18,27 @@ import java.io.IOException;
  * @date: 2023/05/19 <br/>
  * @version: 1.0.0 <br/>
  */
-@WebServlet(name = "users", value = "/users")
+@WebServlet(name = "users", value = "/users/*")
 public class UsersServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         String path = req.getRequestURI();
-        if ("/login".equals(path)) {
+        if (path.endsWith("/login")) {
             // 处理登录请求
             login(req, resp);
-        } else if ("/register".equals(path)) {
+        } else if (path.endsWith("/register")) {
             // 处理注册请求
             register(req, resp);
         } else {
-            resp.sendRedirect("404.html");
+            resp.sendRedirect("/books/404.html");
         }
     }
 
@@ -41,15 +46,15 @@ public class UsersServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         if (username == null || password == null) {
-            resp.sendRedirect("404.html");
+            resp.sendRedirect("/books/404.html");
             return;
         }
         UsersService usersService = new UsersServiceImpl();
         LoginUserInfoVo loginUserInfoVo = usersService.loginByUserNameAndPassword(username, password);
         if (loginUserInfoVo != null) {
-            resp.sendRedirect("index.html");
+            resp.sendRedirect("/books/home.html");
         } else {
-            resp.sendRedirect("404.html");
+            resp.sendRedirect("/books/404.html");
         }
     }
 
