@@ -5,6 +5,7 @@ import com.library.pro.model.po.Books;
 import com.library.pro.model.vo.Result;
 import com.library.pro.service.BooksService;
 import com.library.pro.service.impl.BooksServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  * @className: BooksServlet <br/>
@@ -56,7 +57,10 @@ public class BooksServlet extends HttpServlet {
     private void info(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         Result result = booksService.info(Integer.parseInt(id));
-        new ObjectMapper().writeValue(resp.getWriter(), result);
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
     }
 
     /**
@@ -72,8 +76,12 @@ public class BooksServlet extends HttpServlet {
         String title = req.getParameter("name");
         String author = req.getParameter("isbn");
         String category = req.getParameter("category");
-        Result result = booksService.search(Integer.parseInt(pageNo), title, author, Integer.parseInt(category));
-        new ObjectMapper().writeValue(resp.getWriter(), result);
+        Result result = booksService.search(Integer.parseInt(pageNo), title, author, StringUtils.isBlank(category) ? null : Integer
+                .parseInt(category));
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
     }
 
     /**
@@ -93,10 +101,13 @@ public class BooksServlet extends HttpServlet {
         String publicationDate = req.getParameter("publicationDate");
         String publisher = req.getParameter("publisher");
         String total = req.getParameter("total");
-        Books books = new Books(null, title, author, coverUrl, publisher, LocalDate.parse(publicationDate), isbn, new BigDecimal(price), Integer
+        Books books = new Books(null, title, author, coverUrl, publisher, Date.valueOf(publicationDate), isbn, new BigDecimal(price), Integer
                 .parseInt(total), Integer.parseInt(total));
         Result result = booksService.save(books);
-        new ObjectMapper().writeValue(resp.getWriter(), result);
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
     }
 
     /**
@@ -110,7 +121,10 @@ public class BooksServlet extends HttpServlet {
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         Result result = booksService.delete(Integer.parseInt(id));
-        new ObjectMapper().writeValue(resp.getWriter(), result);
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
     }
 
     /**
@@ -133,9 +147,13 @@ public class BooksServlet extends HttpServlet {
         String stock = req.getParameter("stock");
         Result info = booksService.info(Integer.parseInt(id));
         Books bookInfo = (Books) info.getData();
-        Books books = new Books(Integer.parseInt(id), title, author, coverUrl, publisher, LocalDate.parse(publicationDate), isbn, new BigDecimal(price), bookInfo.getTotal() + Integer.parseInt(stock), bookInfo.getCurrentStock() + Integer.parseInt(stock));
+        Books books = new Books(Integer.parseInt(id), title, author, coverUrl, publisher, Date.valueOf(publicationDate), isbn, new BigDecimal(price), bookInfo
+                .getTotal() + Integer.parseInt(stock), bookInfo.getCurrentStock() + Integer.parseInt(stock));
         Result result = booksService.edit(books);
-        new ObjectMapper().writeValue(resp.getWriter(), result);
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
     }
 
 }

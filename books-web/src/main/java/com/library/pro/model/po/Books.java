@@ -2,7 +2,8 @@ package com.library.pro.model.po;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.sql.Date;
+
 
 /**
  * <p>
@@ -23,7 +24,7 @@ public class Books implements Serializable {
                  String author,
                  String coverUrl,
                  String publisher,
-                 LocalDate publicationDate, String isbn, BigDecimal price, Integer total, Integer currentStock) {
+                 Date publicationDate, String isbn, BigDecimal price, Integer total, Integer currentStock) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -64,7 +65,7 @@ public class Books implements Serializable {
     /**
      * 出版日期
      */
-    private LocalDate publicationDate;
+    private Date publicationDate;
 
     /**
      * ISBN号
@@ -126,11 +127,11 @@ public class Books implements Serializable {
         this.publisher = publisher;
     }
 
-    public LocalDate getPublicationDate() {
+    public Date getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(LocalDate publicationDate) {
+    public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
 

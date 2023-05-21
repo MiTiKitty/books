@@ -55,7 +55,7 @@ public class BooksServiceImpl implements BooksService {
                 pageData.setPageNo(pageNo);
                 pageData.setData(books);
             }
-            return new Result(400, "查询成功", null);
+            return new Result(200, "查询成功", pageData);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 

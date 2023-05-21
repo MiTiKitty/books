@@ -1,5 +1,7 @@
 package com.library.pro.service;
 
+import com.library.pro.model.vo.Result;
+
 /**
  * @className: CategoriesService <br/>
  * @description: 图书分类服务接口 <br/>
@@ -8,4 +10,9 @@ package com.library.pro.service;
  * @version: 1.0.0 <br/>
  */
 public interface CategoriesService {
+
+    Result save(String name);
+
+    Result searchAll();
+
 }

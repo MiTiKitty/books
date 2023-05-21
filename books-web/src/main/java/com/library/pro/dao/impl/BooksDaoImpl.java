@@ -3,11 +3,11 @@ package com.library.pro.dao.impl;
 import com.library.pro.dao.BooksDao;
 import com.library.pro.model.po.Books;
 import com.library.pro.utils.DruidUtils;
+import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.lang3.StringUtils;
 
@@ -76,11 +76,11 @@ public class BooksDaoImpl implements BooksDao {
         List<Books> books = null;
         if (category == null) {
             String sql = "SELECT b.* FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') limit ?, ?";
-            BeanListHandler<Books> handler = new BeanListHandler<Books>(Books.class);
+            BeanListHandler<Books> handler = new BeanListHandler<Books>(Books.class, new BasicRowProcessor(new GenerousBeanProcessor()));
             books = queryRunner.query(sql, handler, title, isbn, (pageNo - 1) * 10, 10);
         } else {
             String sql = "SELECT b.* FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') and bc.category_id = ? limit ?, ?";
-            BeanListHandler<Books> handler = new BeanListHandler<Books>(Books.class);
+            BeanListHandler<Books> handler = new BeanListHandler<Books>(Books.class, new BasicRowProcessor(new GenerousBeanProcessor()));
             books = queryRunner.query(sql, handler, title, isbn, category, (pageNo - 1) * 10, 10);
         }
         return books;
@@ -96,10 +96,10 @@ public class BooksDaoImpl implements BooksDao {
         }
         Long count = 0L;
         if (category == null) {
-            String sql = "SELECT count(b.*) FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%')";
+            String sql = "SELECT count(*) FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%')";
             count = queryRunner.query(sql, new ScalarHandler<>(), title, isbn);
         } else {
-            String sql = "SELECT count(b.*) FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') and bc.category_id = ?";
+            String sql = "SELECT count(*) FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') and bc.category_id = ?";
             count = queryRunner.query(sql, new ScalarHandler<>(), title, isbn, category);
         }
         return count.intValue();

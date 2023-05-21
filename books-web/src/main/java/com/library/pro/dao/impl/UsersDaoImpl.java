@@ -3,6 +3,8 @@ package com.library.pro.dao.impl;
 import com.library.pro.dao.UsersDao;
 import com.library.pro.model.po.Users;
 import com.library.pro.utils.DruidUtils;
+import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -46,21 +48,21 @@ public class UsersDaoImpl implements UsersDao {
     @Override
     public Users selectUserById(Integer id) throws SQLException {
         String sql = "select * from users where id = ?";
-        ResultSetHandler<Users> result = new BeanHandler<>(Users.class);
+        ResultSetHandler<Users> result = new BeanHandler<>(Users.class, new BasicRowProcessor(new GenerousBeanProcessor()));
         return queryRunner.query(sql, result, id);
     }
 
     @Override
     public Users selectUserByUsername(String username) throws SQLException {
         String sql = "select * from users where username = ?";
-        ResultSetHandler<Users> result = new BeanHandler<>(Users.class);
+        ResultSetHandler<Users> result = new BeanHandler<>(Users.class, new BasicRowProcessor(new GenerousBeanProcessor()));
         return queryRunner.query(sql, result, username);
     }
 
     @Override
     public List<Users> selectUsers() throws SQLException {
         String sql = "select * from users";
-        BeanListHandler<Users> result = new BeanListHandler<Users>(Users.class);
+        BeanListHandler<Users> result = new BeanListHandler<Users>(Users.class, new BasicRowProcessor(new GenerousBeanProcessor()));
         return queryRunner.query(sql, result);
     }
 }

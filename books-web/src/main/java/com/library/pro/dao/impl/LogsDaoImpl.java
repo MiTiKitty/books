@@ -3,6 +3,8 @@ package com.library.pro.dao.impl;
 import com.library.pro.dao.LogsDao;
 import com.library.pro.model.po.Logs;
 import com.library.pro.utils.DruidUtils;
+import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -26,7 +28,7 @@ public class LogsDaoImpl implements LogsDao {
     public List<Logs> getAllLogs() {
         List<Logs> logsList = null;
         try {
-            logsList = queryRunner.query("SELECT * FROM logs", new BeanListHandler<>(Logs.class));
+            logsList = queryRunner.query("SELECT * FROM logs", new BeanListHandler<>(Logs.class, new BasicRowProcessor(new GenerousBeanProcessor())));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -37,7 +39,7 @@ public class LogsDaoImpl implements LogsDao {
     public Logs getLogsById(Integer id) {
         Logs logs = null;
         try {
-            logs = queryRunner.query("SELECT * FROM logs WHERE id = ?", new BeanHandler<>(Logs.class), id);
+            logs = queryRunner.query("SELECT * FROM logs WHERE id = ?", new BeanHandler<>(Logs.class, new BasicRowProcessor(new GenerousBeanProcessor())), id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

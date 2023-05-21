@@ -1,5 +1,10 @@
 package com.library.pro.dao;
 
+import com.library.pro.model.po.BookCategory;
+import com.library.pro.model.po.BookCategoryNode;
+
+import java.util.List;
+
 /**
  * @className: BookCategoryDao <br/>
  * @description: 图书分类持久层接口 <br/>
@@ -8,4 +13,11 @@ package com.library.pro.dao;
  * @version: 1.0.0 <br/>
  */
 public interface BookCategoryDao {
+
+    int save(BookCategory category);
+
+    int del(BookCategory category);
+
+    List<BookCategoryNode> groupByCategory();
+
 }

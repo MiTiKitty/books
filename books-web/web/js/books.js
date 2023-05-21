@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    searchCategory()
     searchPage()
 
     $('#editSaveBtn').click(function () {
@@ -50,6 +51,17 @@ $(document).ready(function () {
     });
 
     $('#addSaveBtn').click(function () {
+        let box = $('input[type=checkbox][name=category]')
+        let c = []
+        for (let i = 0; i < box.length; i++) {
+            if (box[i].checked) {
+                c.push(box[i].val())
+            }
+        }
+        if (c.length === 0) {
+            alert('请选择分类');
+            return;
+        }
         $.ajax({
             url: '/books/book/add',
             type: 'POST',
@@ -125,6 +137,7 @@ $(document).ready(function () {
             success: function (rep) {
                 if (rep.code == 200) {
                     let data = rep.data.data
+                    console.log(rep, data)
                     var table = $("#dataTable tbody");
                     $.each(data, function (index, value) {
                         var row = $("<tr class='my-tr'>");
@@ -276,6 +289,26 @@ $(document).ready(function () {
 
     function changePageList(page, size) {
 
+    }
+
+    function searchCategory() {
+        $.ajax({
+            url: "/books/category/all",
+            type: "POST",
+            success: function (res) {
+                if (res.code == 200) {
+                    let categories = res.data
+                    $.each(categories, function (index, v) {
+                        createTag(v.id, v.name)
+                    })
+                }
+            }
+        })
+    }
+
+    function createTag(id, name) {
+        let e = `<label><input type="checkbox" name="category" value="${id}">${name}</label>`
+        $('#tags').append(e)
     }
 });
 
