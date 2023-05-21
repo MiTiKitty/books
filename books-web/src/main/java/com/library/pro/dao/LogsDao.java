@@ -13,10 +13,19 @@ import java.util.List;
  */
 public interface LogsDao {
 
+    //获取所有日志
     List<Logs> getAllLogs();
+
+    //根据id获取日志
     Logs getLogsById(Integer id);
+
+    //添加日志
     void addLogs(Logs logs);
+
+    //更新日志
     void updateLogs(Logs logs);
+
+    //根据id删除日志
     void deleteLogs(Integer id);
 
 }

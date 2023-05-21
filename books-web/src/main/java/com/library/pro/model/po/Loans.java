@@ -3,7 +3,6 @@ package com.library.pro.model.po;
 import java.io.Serializable;
 
 /**
- * <p>
  * 借阅表，表名：loans
  * </p>
  *
