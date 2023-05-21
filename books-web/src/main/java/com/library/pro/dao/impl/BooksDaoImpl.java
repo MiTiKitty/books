@@ -56,13 +56,13 @@ public class BooksDaoImpl implements BooksDao {
     @Override
     public Books selectBookById(Integer id) throws SQLException {
         String sql = "SELECT * FROM books WHERE `id`=?";
-        return queryRunner.query(sql, new BeanHandler<>(Books.class), id);
+        return queryRunner.query(sql, new BeanHandler<>(Books.class, new BasicRowProcessor(new GenerousBeanProcessor())), id);
     }
 
     @Override
     public Books selectBookBybookname(String title) throws SQLException {
         String sql = "SELECT * FROM books WHERE `title`=?";
-        return queryRunner.query(sql, new BeanHandler<>(Books.class), title);
+        return queryRunner.query(sql, new BeanHandler<>(Books.class, new BasicRowProcessor(new GenerousBeanProcessor())), title);
     }
 
     @Override

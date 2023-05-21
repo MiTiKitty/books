@@ -38,6 +38,17 @@ public class Borrowers implements Serializable {
      */
     private String address;
 
+    public Borrowers() {
+    }
+
+    public Borrowers(Integer id, String name, String email, String phone, String address) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public Integer getId() {
         return id;
     }

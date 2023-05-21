@@ -5,8 +5,10 @@ import com.library.pro.model.po.Borrowers;
 import com.library.pro.utils.DruidUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @className: BorrowersDaoImpl <br/>
@@ -43,6 +45,12 @@ public class BorrowersDaoImpl implements BorrowersDao {
     public Borrowers selectBorrowerByName(String name) throws SQLException {
         String sql = "SELECT * FROM borrowers WHERE name = ?";
         return  queryRunner.query(sql, new BeanHandler<>(Borrowers.class), name);
+    }
+
+    @Override
+    public List<Borrowers> selectBorrower(String keyword) throws SQLException {
+        String sql = "SELECT * FROM borrowers WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? limit 10";
+        return queryRunner.query(sql, new BeanListHandler<>(Borrowers.class), "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%");
     }
 
 }

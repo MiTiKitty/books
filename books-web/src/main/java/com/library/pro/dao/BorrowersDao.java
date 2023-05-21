@@ -3,6 +3,7 @@ package com.library.pro.dao;
 import com.library.pro.model.po.Borrowers;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @className: BorrowersDao <br/>
@@ -21,4 +22,5 @@ public interface BorrowersDao {
     //根据姓名查找借阅者信息
     Borrowers selectBorrowerByName(String name) throws SQLException;
 
+    List<Borrowers> selectBorrower(String keyword) throws SQLException;
 }

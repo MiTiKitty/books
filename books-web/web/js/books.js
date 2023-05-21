@@ -3,6 +3,8 @@ $(document).ready(function () {
     searchPage()
 
     $('#editSaveBtn').click(function () {
+        var id = $("#editBookId").val()
+        var coverUrl = $("#editBookCover").val()
         var bookName = $('#bookName').val();
         var author = $('#author').val();
         var publisher = $('#publisher').val();
@@ -14,9 +16,9 @@ $(document).ready(function () {
             url: "/books/book/edit",
             type: "POST",
             data: {
-                id: $('#editBookId').val(),
+                id: id,
                 title: bookName,
-                coverUrl: $('#bookCover').val(),
+                coverUrl: coverUrl,
                 author: author,
                 publisher: publisher,
                 publicationDate: date,
@@ -37,6 +39,8 @@ $(document).ready(function () {
     function resetForm() {
         $('#bookName').val('');
         $('#author').val('');
+        $('#editBookCover').val('');
+        $('#editBookId').val('');
         $('#publisher').val('');
         $('#date').val('');
         $('#isbn').val('');
@@ -146,7 +150,7 @@ $(document).ready(function () {
                         row.append($("<td>").text(value.title));
                         row.append($("<td>").text(value.author));
                         row.append($("<td>").text(value.publisher));
-                        row.append($("<td>").text(value.publicationDate));
+                        row.append($("<td>").text(new Date(value.publicationDate)));
                         row.append($("<td>").text(value.isbn));
                         row.append($("<td>").text(value.price));
                         row.append($("<td>").text(value.total));
@@ -166,20 +170,24 @@ $(document).ready(function () {
                         editBtn.click(function () {
                             resetForm();
                             $.ajax({
-                                url: "/books/book_info",
+                                url: "/books/book/info",
                                 type: "GET",
                                 data: {id: value.id},
-                                success: function (response) {
-                                    $('#editBookId').val(response.id)
-                                    $('#bookName').val(response.title);
-                                    $('#author').val(response.author);
-                                    $('#publisher').val(response.publisher);
-                                    $('#date').val(response.publicationDate);
-                                    $('#isbn').val(response.isbn);
-                                    $('#price').val(response.price);
-                                    $('#total').val(response.total);
-                                    $('#stock').val(response.stock);
-                                    $('#editModal').modal('show');
+                                success: function (rep) {
+                                    if (rep.code === 200) {
+                                        let response = rep.data
+                                        $('#editBookId').val(response.id);
+                                        $('#editBookCover').val(response.coverUrl);
+                                        $('#bookName').val(response.title);
+                                        $('#author').val(response.author);
+                                        $('#publisher').val(response.publisher);
+                                        $('#date').val(new Date(response.publicationDate));
+                                        $('#isbn').val(response.isbn);
+                                        $('#price').val(response.price);
+                                        $('#total').val(response.total);
+                                        $('#stock').val(response.stock);
+                                        $('#editModal').modal('show');
+                                    }
                                 },
                                 error: function (error) {
                                     console.log(error);
@@ -189,7 +197,7 @@ $(document).ready(function () {
                         deleteBtn.click(function () {
                             if (confirm("确定删除吗？")) {
                                 $.ajax({
-                                    url: "/books/del_book",
+                                    url: "/books/book/del",
                                     type: "POST",
                                     data: {id: value.id},
                                     success: function (response) {
@@ -212,71 +220,6 @@ $(document).ready(function () {
                 alert('搜索出错');
             }
         })
-        let data = []
-        var table = $("#dataTable tbody");
-        $.each(data, function (index, value) {
-            var row = $("<tr class='my-tr'>");
-            row.append($("<th scope='row' style='line-height: 120px;'>").text(index + 1));
-            row.append($("<td>").append($("<img class=\"cover-img\">").attr("src", (value.coverUrl ? value.coverUrl : './img/defaultBookCover.jpg'))));
-            row.append($("<td>").text(value.title));
-            row.append($("<td>").text(value.author));
-            row.append($("<td>").text(value.publisher));
-            row.append($("<td>").text(value.publicationDate));
-            row.append($("<td>").text(value.isbn));
-            row.append($("<td>").text(value.price));
-            row.append($("<td>").text(value.total));
-            row.append($("<td>").text(value.currentStock));
-            var btnGroup = $("<div class='my-btn-group'>");
-            var editBtn = $("<button type='button' class='btn btn-primary' value='" + value.id + "'>").text("编辑");
-            var deleteBtn = $("<button type='button' class='btn btn-danger' value='" + value.id + "'>").text("删除");
-            var btnGroupDiv = $("<div class='btn-group my-btn'>");
-            btnGroupDiv.append(editBtn);
-            btnGroup.append(btnGroupDiv);
-            btnGroupDiv = $("<div class='btn-group my-btn'>");
-            btnGroupDiv.append(deleteBtn);
-            btnGroup.append(btnGroupDiv);
-            row.append($("<td>").append(btnGroup));
-
-            // TODO 发起编辑请求
-            editBtn.click(function () {
-                resetForm();
-                $.ajax({
-                    url: "/books/book/info",
-                    type: "GET",
-                    data: {id: value.id},
-                    success: function (response) {
-                        $('#bookName').val(response.name);
-                        $('#author').val(response.author);
-                        $('#publisher').val(response.publisher);
-                        $('#date').val(response.date);
-                        $('#isbn').val(response.isbn);
-                        $('#price').val(response.price);
-                        $('#total').val(response.total);
-                        $('#stock').val(response.stock);
-                        $('#editModal').modal('show');
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-            });
-            deleteBtn.click(function () {
-                if (confirm("确定删除吗？")) {
-                    $.ajax({
-                        url: "/books/book/del",
-                        type: "POST",
-                        data: {id: value.id},
-                        success: function (response) {
-                            console.log(response);
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
-                    });
-                }
-            });
-            table.append(row);
-        });
     }
 
     function pSearch() {

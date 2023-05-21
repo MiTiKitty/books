@@ -42,6 +42,16 @@ public class Loans implements Serializable {
      */
     private Long returnDate;
 
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -99,6 +109,7 @@ public class Loans implements Serializable {
                 ", loanDate=" + loanDate +
                 ", dueDate=" + dueDate +
                 ", returnDate=" + returnDate +
+                ", status=" + status +
                 '}';
     }
 }
