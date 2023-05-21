@@ -44,11 +44,19 @@ public class BooksServlet extends HttpServlet {
             add(req, resp);
         } else if (path.endsWith("/edit")) {
             update(req, resp);
+        } else if (path.endsWith("/info")) {
+            info(req, resp);
         } else if (path.endsWith("/del")) {
             delete(req, resp);
         } else {
             resp.sendRedirect("/books/404.html");
         }
+    }
+
+    private void info(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        Result result = booksService.info(Integer.parseInt(id));
+        new ObjectMapper().writeValue(resp.getWriter(), result);
     }
 
     /**
@@ -114,7 +122,20 @@ public class BooksServlet extends HttpServlet {
      * @throws IOException
      */
     private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        String id = req.getParameter("id");
+        String title = req.getParameter("title");
+        String author = req.getParameter("author");
+        String coverUrl = req.getParameter("coverUrl");
+        String isbn = req.getParameter("isbn");
+        String price = req.getParameter("price");
+        String publicationDate = req.getParameter("publicationDate");
+        String publisher = req.getParameter("publisher");
+        String stock = req.getParameter("stock");
+        Result info = booksService.info(Integer.parseInt(id));
+        Books bookInfo = (Books) info.getData();
+        Books books = new Books(Integer.parseInt(id), title, author, coverUrl, publisher, LocalDate.parse(publicationDate), isbn, new BigDecimal(price), bookInfo.getTotal() + Integer.parseInt(stock), bookInfo.getCurrentStock() + Integer.parseInt(stock));
+        Result result = booksService.edit(books);
+        new ObjectMapper().writeValue(resp.getWriter(), result);
     }
 
 }

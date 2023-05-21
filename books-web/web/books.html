@@ -197,6 +197,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
+                                <input type="text" id="editBookId" value="0" hidden>
                                 <h5 class="modal-title" id="editModalLabel">编辑图书</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -211,6 +212,10 @@
                                     <div class="form-group">
                                         <label for="author" class="col-form-label">作者:</label>
                                         <input type="text" class="form-control" id="author">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bookCover" class="col-form-label">封面链接:</label>
+                                        <input type="text" class="form-control" id="bookCover">
                                     </div>
                                     <div class="form-group">
                                         <label for="publisher" class="col-form-label">出版社:</label>

@@ -43,4 +43,20 @@ public interface BooksService {
      * @return
      */
     Result delete(int id);
+
+    /**
+     * 根据id查询图书
+     *
+     * @param id
+     * @return
+     */
+    Result info(int id);
+
+    /**
+     * 修改图书
+     *
+     * @param books
+     * @return
+     */
+    Result edit(Books books);
 }

@@ -68,4 +68,32 @@ public class BooksServiceImpl implements BooksService {
         // 不应该物理删除
         return null;
     }
+
+    @Override
+    public Result info(int id) {
+        try {
+            Books books = booksDao.selectBookById(id);
+            if (books == null) {
+                return new Result(500, "查询失败", null);
+            }
+            return new Result(200, "查询成功", books);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new Result(500, "查询失败", null);
+    }
+
+    @Override
+    public Result edit(Books books) {
+        int i = 0;
+        try {
+            i = booksDao.updateBookById(books);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (i > 0) {
+            return new Result(200, "修改成功", null);
+        }
+        return new Result(500, "修改失败", null);
+    }
 }

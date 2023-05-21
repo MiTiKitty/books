@@ -8,19 +8,19 @@ $(document).ready(function () {
         var date = $('#date').val();
         var isbn = $('#isbn').val();
         var price = $('#price').val();
-        var total = $('#total').val();
         var stock = $('#stock').val();
         $.ajax({
-            url: "/books/edit_book",
+            url: "/books/book/edit",
             type: "POST",
             data: {
-                name: bookName,
+                id: $('#editBookId').val(),
+                title: bookName,
+                coverUrl: $('#bookCover').val(),
                 author: author,
                 publisher: publisher,
-                date: date,
+                publicationDate: date,
                 isbn: isbn,
                 price: price,
-                total: total,
                 stock: stock
             },
             success: function (response) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
             type: 'POST',
             data: {
                 title: $('#abookName').val(),
-                coverUrl: $('#abookCover').val,
+                coverUrl: $('#abookCover').val(),
                 author: $('#aauthor').val(),
                 publisher: $('#apublisher').val(),
                 publicationDate: $('#adate').val(),
@@ -157,10 +157,11 @@ $(document).ready(function () {
                                 type: "GET",
                                 data: {id: value.id},
                                 success: function (response) {
-                                    $('#bookName').val(response.name);
+                                    $('#editBookId').val(response.id)
+                                    $('#bookName').val(response.title);
                                     $('#author').val(response.author);
                                     $('#publisher').val(response.publisher);
-                                    $('#date').val(response.date);
+                                    $('#date').val(response.publicationDate);
                                     $('#isbn').val(response.isbn);
                                     $('#price').val(response.price);
                                     $('#total').val(response.total);
@@ -227,7 +228,7 @@ $(document).ready(function () {
             editBtn.click(function () {
                 resetForm();
                 $.ajax({
-                    url: "/books/book_info",
+                    url: "/books/book/info",
                     type: "GET",
                     data: {id: value.id},
                     success: function (response) {
@@ -249,7 +250,7 @@ $(document).ready(function () {
             deleteBtn.click(function () {
                 if (confirm("确定删除吗？")) {
                     $.ajax({
-                        url: "/books/del_book",
+                        url: "/books/book/del",
                         type: "POST",
                         data: {id: value.id},
                         success: function (response) {
