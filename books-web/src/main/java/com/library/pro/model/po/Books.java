@@ -15,6 +15,27 @@ public class Books implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
+    public Books() {
+    }
+
+    public Books(Integer id,
+                 String title,
+                 String author,
+                 String coverUrl,
+                 String publisher,
+                 LocalDate publicationDate, String isbn, BigDecimal price, Integer total, Integer currentStock) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.coverUrl = coverUrl;
+        this.publisher = publisher;
+        this.publicationDate = publicationDate;
+        this.isbn = isbn;
+        this.price = price;
+        this.total = total;
+        this.currentStock = currentStock;
+    }
+
     /**
      * 图书ID
      */
