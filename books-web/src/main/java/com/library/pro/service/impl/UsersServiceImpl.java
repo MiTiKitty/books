@@ -42,7 +42,7 @@ public class UsersServiceImpl implements UsersService {
     public Boolean registerUser(RegisterUserDto dto) {
         Users users = new Users();
         users.setUsername(dto.getUsername());
-        users.setPassword(PasswordHelper.generatePassword(dto.getPassword()));
+        users.setPassword(PasswordHelper.generateEncryptedPassword(dto.getPassword()));
         users.setEmail(dto.getEmail());
         users.setPhone(dto.getPhone());
         users.setAddress(dto.getAddress());

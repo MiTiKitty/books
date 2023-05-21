@@ -1,5 +1,6 @@
 package com.library.pro.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.pro.model.vo.LoginUserInfoVo;
 import com.library.pro.service.UsersService;
 import com.library.pro.service.impl.UsersServiceImpl;
@@ -23,7 +24,7 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        doPost(req, resp);
     }
 
     @Override
@@ -34,9 +35,6 @@ public class UsersServlet extends HttpServlet {
         if (path.endsWith("/login")) {
             // 处理登录请求
             login(req, resp);
-        } else if (path.endsWith("/register")) {
-            // 处理注册请求
-            register(req, resp);
         } else {
             resp.sendRedirect("/books/404.html");
         }
@@ -51,15 +49,11 @@ public class UsersServlet extends HttpServlet {
         }
         UsersService usersService = new UsersServiceImpl();
         LoginUserInfoVo loginUserInfoVo = usersService.loginByUserNameAndPassword(username, password);
-        if (loginUserInfoVo != null) {
-            resp.sendRedirect("/books/home.html");
-        } else {
+        if (loginUserInfoVo == null) {
             resp.sendRedirect("/books/404.html");
+        }else {
+            new ObjectMapper().writeValue(resp.getWriter(), loginUserInfoVo);
         }
-    }
-
-    private void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 
 }
