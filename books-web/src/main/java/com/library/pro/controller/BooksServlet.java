@@ -2,6 +2,7 @@ package com.library.pro.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.pro.model.po.Books;
+import com.library.pro.model.vo.BooksInfoVO;
 import com.library.pro.model.vo.Result;
 import com.library.pro.service.BooksService;
 import com.library.pro.service.impl.BooksServiceImpl;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @className: BooksServlet <br/>
@@ -43,6 +46,8 @@ public class BooksServlet extends HttpServlet {
             search(req, resp);
         } else if (path.endsWith("/add")) {
             add(req, resp);
+        } else if (path.endsWith("/find")) {
+            searchOne(req, resp);
         } else if (path.endsWith("/edit")) {
             update(req, resp);
         } else if (path.endsWith("/info")) {
@@ -84,6 +89,15 @@ public class BooksServlet extends HttpServlet {
         mapper.writeValue(resp.getWriter(), result);
     }
 
+    private void searchOne(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String title = req.getParameter("name");
+        Result result = booksService.searchOne(title);
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
+    }
+
     /**
      * 添加图书
      *
@@ -101,9 +115,15 @@ public class BooksServlet extends HttpServlet {
         String publicationDate = req.getParameter("publicationDate");
         String publisher = req.getParameter("publisher");
         String total = req.getParameter("total");
+        String c = req.getParameter("c");
         Books books = new Books(null, title, author, coverUrl, publisher, Date.valueOf(publicationDate), isbn, new BigDecimal(price), Integer
                 .parseInt(total), Integer.parseInt(total));
-        Result result = booksService.save(books);
+        String[] cIds = c.split("&");
+        List<Integer> collect = new ArrayList<Integer>(cIds.length);
+        for (String cid : cIds) {
+            collect.add(Integer.parseInt(cid));
+        }
+        Result result = booksService.save(books, collect);
         ObjectMapper mapper = new ObjectMapper();
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=utf-8");
@@ -145,11 +165,18 @@ public class BooksServlet extends HttpServlet {
         String publicationDate = req.getParameter("publicationDate");
         String publisher = req.getParameter("publisher");
         String stock = req.getParameter("stock");
+        String c = req.getParameter("c");
         Result info = booksService.info(Integer.parseInt(id));
-        Books bookInfo = (Books) info.getData();
+        BooksInfoVO bookInfoVO = (BooksInfoVO) info.getData();
+        Books bookInfo = bookInfoVO.getBook();
+        String[] cIds = c.split("&");
+        List<Integer> collect = new ArrayList<>(cIds.length);
+        for (String cid : cIds) {
+            collect.add(Integer.parseInt(cid));
+        }
         Books books = new Books(Integer.parseInt(id), title, author, coverUrl, publisher, Date.valueOf(publicationDate), isbn, new BigDecimal(price), bookInfo
                 .getTotal() + Integer.parseInt(stock), bookInfo.getCurrentStock() + Integer.parseInt(stock));
-        Result result = booksService.edit(books);
+        Result result = booksService.edit(books, collect);
         ObjectMapper mapper = new ObjectMapper();
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=utf-8");

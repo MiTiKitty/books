@@ -17,4 +17,8 @@ public interface BorrowersService {
     Result search(int pageNo, String keyword);
 
     Result searchOne(String keyword);
+
+    Result info(int id);
+
+    Result edit(Borrowers borrowers);
 }

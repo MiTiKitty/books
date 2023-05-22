@@ -1,8 +1,22 @@
+let theTotalPage = 1;
+
 $(document).ready(function () {
     searchCategory()
     searchPage()
 
+    // 发起编辑修改请求
     $('#editSaveBtn').click(function () {
+        let box = $('#editTags input[type=checkbox]')
+        let c = ''
+        for (let i = 0; i < box.length; i++) {
+            if (box[i].checked) {
+                c += box[i].value + '&'
+            }
+        }
+        if (c.trim().length === 0) {
+            alert('请选择分类');
+            return;
+        }
         var id = $("#editBookId").val()
         var coverUrl = $("#editBookCover").val()
         var bookName = $('#bookName').val();
@@ -12,6 +26,11 @@ $(document).ready(function () {
         var isbn = $('#isbn').val();
         var price = $('#price').val();
         var stock = $('#stock').val();
+        let currentStock = $('#currentStock').val();
+        if (parseInt(stock) + parseInt(currentStock) < 0) {
+            alert('库存不足供减少，请重新输入');
+            return;
+        }
         $.ajax({
             url: "/books/book/edit",
             type: "POST",
@@ -24,11 +43,16 @@ $(document).ready(function () {
                 publicationDate: date,
                 isbn: isbn,
                 price: price,
+                c: c,
                 stock: stock
             },
             success: function (response) {
-                console.log(response);
-                $('#editModal').modal('hide');
+                if (response.code == 200) {
+                    alert('修改成功');
+                    $('#editModal').modal('hide');
+                } else {
+                    alert('修改失败');
+                }
             },
             error: function (error) {
                 console.log(error);
@@ -36,6 +60,7 @@ $(document).ready(function () {
         });
     })
 
+    // 重置编辑表单
     function resetForm() {
         $('#bookName').val('');
         $('#author').val('');
@@ -47,22 +72,25 @@ $(document).ready(function () {
         $('#price').val('');
         $('#total').val('');
         $('#stock').val('');
+        $('#editTags input[type=checkbox]').prop('checked', false);
     }
 
+    // 给添加图书按钮绑定监听事件
     $('#addBookBtn').click(function () {
         resetAForm()
         $('#addModal').modal('show');
     });
 
+    // 发起添加图书请求
     $('#addSaveBtn').click(function () {
         let box = $('input[type=checkbox][name=category]')
-        let c = []
+        let c = ''
         for (let i = 0; i < box.length; i++) {
             if (box[i].checked) {
-                c.push(box[i].val())
+                c += box[i].value + '&'
             }
         }
-        if (c.length === 0) {
+        if (c.trim().length === 0) {
             alert('请选择分类');
             return;
         }
@@ -77,7 +105,8 @@ $(document).ready(function () {
                 publicationDate: $('#adate').val(),
                 isbn: $('#aisbn').val(),
                 price: $('#aprice').val(),
-                total: $('#atotal').val()
+                total: $('#atotal').val(),
+                c: c
             },
             success: function (data) {
                 alert('添加成功');
@@ -92,11 +121,13 @@ $(document).ready(function () {
     function resetAForm() {
         $('#abookName').val('');
         $('#aauthor').val('');
+        $('#abookCover').val('');
         $('#apublisher').val('');
         $('#adate').val('');
         $('#aisbn').val('');
         $('#aprice').val('');
         $('#atotal').val('');
+        $('#addTags input[type=checkbox]').prop('checked', false);
     }
 
     $('#searchName').on('input', function () {
@@ -127,12 +158,13 @@ $(document).ready(function () {
         searchPage()
     });
 
-    function searchPage() {
+    // 发起搜索请求
+    function searchPage(is=true) {
         $.ajax({
             url: '/books/book/search',
             type: 'POST',
             data: {
-                pageNo: $('#pageNo').val(),
+                pageNo: is ? 1 : $('#pageNo').val(),
                 name: $('#searchName').val(),
                 isbn: $('#searchIsbn').val(),
                 category: $('#bookCategory').val() == 'all' ? null : $('#bookCategory').val()
@@ -141,8 +173,8 @@ $(document).ready(function () {
             success: function (rep) {
                 if (rep.code == 200) {
                     let data = rep.data.data
-                    console.log(rep, data)
                     var table = $("#dataTable tbody");
+                    $("#dataTable tbody tr").remove();
                     $.each(data, function (index, value) {
                         var row = $("<tr class='my-tr'>");
                         row.append($("<th scope='row' style='line-height: 120px;'>").text(index + 1));
@@ -150,7 +182,7 @@ $(document).ready(function () {
                         row.append($("<td>").text(value.title));
                         row.append($("<td>").text(value.author));
                         row.append($("<td>").text(value.publisher));
-                        row.append($("<td>").text(new Date(value.publicationDate)));
+                        row.append($("<td>").text(formatDate(value.publicationDate)));
                         row.append($("<td>").text(value.isbn));
                         row.append($("<td>").text(value.price));
                         row.append($("<td>").text(value.total));
@@ -166,7 +198,7 @@ $(document).ready(function () {
                         btnGroup.append(btnGroupDiv);
                         row.append($("<td>").append(btnGroup));
 
-                        // TODO 发起编辑请求
+                        // 发起编辑请求
                         editBtn.click(function () {
                             resetForm();
                             $.ajax({
@@ -175,17 +207,27 @@ $(document).ready(function () {
                                 data: {id: value.id},
                                 success: function (rep) {
                                     if (rep.code === 200) {
-                                        let response = rep.data
+                                        let theP = rep.data
+                                        let response = theP.book
                                         $('#editBookId').val(response.id);
                                         $('#editBookCover').val(response.coverUrl);
                                         $('#bookName').val(response.title);
                                         $('#author').val(response.author);
                                         $('#publisher').val(response.publisher);
-                                        $('#date').val(new Date(response.publicationDate));
+                                        $('#date').val(formatDate(response.publicationDate));
                                         $('#isbn').val(response.isbn);
                                         $('#price').val(response.price);
                                         $('#total').val(response.total);
-                                        $('#stock').val(response.stock);
+                                        $('#stock').val(0);
+                                        $('#currentStock').val(response.currentStock);
+                                        let collect = theP.categoryIds
+                                        let box = $('#editTags input[type=checkbox]')
+                                        $.each(box, (index, v) => {
+                                            let value = $(v)
+                                            if (collect.indexOf(parseInt(value.val())) !== -1) {
+                                                value.prop('checked', true);
+                                            }
+                                        })
                                         $('#editModal').modal('show');
                                     }
                                 },
@@ -194,6 +236,8 @@ $(document).ready(function () {
                                 }
                             });
                         });
+
+                        // 绑定删除事件
                         deleteBtn.click(function () {
                             if (confirm("确定删除吗？")) {
                                 $.ajax({
@@ -211,7 +255,9 @@ $(document).ready(function () {
                         });
                         table.append(row);
                     });
-                    changePageList(1, rep.data.pageTotal)
+                    if (is) {
+                        createPageList(1, rep.data.pageTotal)
+                    }
                 } else {
                     alert(data.message)
                 }
@@ -222,18 +268,68 @@ $(document).ready(function () {
         })
     }
 
-    function pSearch() {
+    // 创建分页组件
+    function createPageList(curPage, totalPage) {
+        theTotalPage = totalPage
+        // 获取分页视图元素
+        var pagination = $('#pageList');
+        $('#pageList li').remove();
+        // 获取上一页和下一页链接元素
+        var prevLink = $('#p-page');
+        var nextLink = $('#n-page');
+        // 获取当前页元素
+        var currentPage = $('#pageNo');
 
+        let p = `<li class="page-item"><a class="page-link" href="#" id="p-page">上一页</a></li>`
+        pagination.append(p);
+
+        // 初始化分页链接
+        for (var i = 1; i <= totalPage; i++) {
+            var li = $('<li index="' + i + '" class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
+            pagination.append(li)
+        }
+
+        let n = `<li class="page-item"><a class="page-link" href="#" id="n-page">下一页</a></li>`
+        pagination.append(n);
+
+        // 初始化分页信息
+        currentPage.val(curPage);
+
+        // 隐藏无效链接
+        if (curPage == 1) {
+            prevLink.parent().addClass('disabled');
+        }
+        if (curPage == totalPage) {
+            nextLink.parent().addClass('disabled');
+        }
+
+        // 绑定点击事件
+        pagination.on('click', 'a', function (e) {
+            let cc = $('#pageNo').val()
+            e.preventDefault();
+            var target = $(this);
+            // 判断是否为上一页或下一页链接
+            if (target.attr('id') === 'p-page') {
+                cc--;
+                cc = Math.max(cc, 1)
+            } else if (target.attr('id') === 'n-page') {
+                cc++;
+                cc = Math.min(cc, theTotalPage)
+            } else {
+                cc = parseInt(target.text());
+            }
+
+            // 更新分页信息
+            $('#pageNo').val(cc);
+            searchPage(false);
+
+            // 更新链接状态
+            pagination.find('.page-item').removeClass('page-active');
+            pagination.find('a:contains(' + cc + ')').parent().addClass('page-active');
+        });
     }
 
-    function nSearch() {
-
-    }
-
-    function changePageList(page, size) {
-
-    }
-
+    // 搜索全部分类
     function searchCategory() {
         $.ajax({
             url: "/books/category/all",
@@ -241,17 +337,28 @@ $(document).ready(function () {
             success: function (res) {
                 if (res.code == 200) {
                     let categories = res.data
+                    let e = ``;
+                    let category = `<option selected value="all">全部</option>`;
                     $.each(categories, function (index, v) {
-                        createTag(v.id, v.name)
+                        e += `<label><input type="checkbox" name="category" value="${v.id}">${v.name}</label>`
+                        category += `<option value="${v.id}">${v.name}</option>`
                     })
+                    $('#bookCategory option').remove()
+                    $('.tags label').remove()
+                    $('#bookCategory').append(category)
+                    $('.tags').append(e)
                 }
             }
         })
     }
 
-    function createTag(id, name) {
-        let e = `<label><input type="checkbox" name="category" value="${id}">${name}</label>`
-        $('#tags').append(e)
+    function formatDate(time) {
+        let date = new Date(time);
+        let yyyy = date.getFullYear();
+        let mm = String(date.getMonth() + 1).padStart(2, '0'); // 将月份转换为两位数，例如 "06"
+        let dd = String(date.getDate()).padStart(2, '0'); // 将日期转换为两位数，例如 "06"
+         // 将日期格式化为 "yyyy-mm-dd" 的字符串
+        return yyyy + '-' + mm + '-' + dd;
     }
 });
 

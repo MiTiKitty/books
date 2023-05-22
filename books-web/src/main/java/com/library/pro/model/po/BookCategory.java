@@ -28,6 +28,14 @@ public class BookCategory implements Serializable {
      */
     private Integer categoryId;
 
+    public BookCategory() {
+    }
+
+    public BookCategory(Integer bookId, Integer categoryId) {
+        this.bookId = bookId;
+        this.categoryId = categoryId;
+    }
+
     public Integer getId() {
         return id;
     }

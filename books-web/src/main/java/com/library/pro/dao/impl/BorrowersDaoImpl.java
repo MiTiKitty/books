@@ -1,11 +1,13 @@
 package com.library.pro.dao.impl;
 
 import com.library.pro.dao.BorrowersDao;
+import com.library.pro.model.po.BorrowerNode;
 import com.library.pro.model.po.Borrowers;
 import com.library.pro.utils.DruidUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -51,6 +53,15 @@ public class BorrowersDaoImpl implements BorrowersDao {
     public List<Borrowers> selectBorrower(String keyword) throws SQLException {
         String sql = "SELECT * FROM borrowers WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? limit 10";
         return queryRunner.query(sql, new BeanListHandler<>(Borrowers.class), "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%");
+    }
+
+    @Override
+    public BorrowerNode search(int pageNo, String keyword) throws SQLException {
+        String sql = "SELECT * FROM borrowers WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? limit ?, ?";
+        String countSql = "SELECT count(*) FROM borrowers WHERE name LIKE ? OR email LIKE ? OR phone LIKE ?";
+        List<Borrowers> borrowers = queryRunner.query(sql, new BeanListHandler<>(Borrowers.class), "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%", (pageNo - 1) * 10, 10);
+        long total = queryRunner.query(countSql, new ScalarHandler<>(), "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%");
+        return new BorrowerNode(borrowers, total);
     }
 
 }

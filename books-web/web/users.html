@@ -11,6 +11,7 @@
     <script src="./js/bootstarp.js"></script>
     <!-- 引入EChart.js  -->
     <script src="./js/echat.min.js"></script>
+    <script src="./js/users.js"></script>
     <style>
         .bor {
             border-bottom: 1px solid #3d3d3d;
@@ -79,17 +80,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./users.html">用户管理</a>
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="./notify.html">通知管理</a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./loans.html">借阅管理</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./logs.html">日志管理</a>
                     </li>
                 </ul>
             </div>
@@ -103,18 +96,18 @@
                     <div class="col-md-6">
                         <form>
                             <div class="form-group">
-                                <label for="searchInput">搜索用户</label>
+                                <label for="searchKeyword">搜索用户</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="searchInput" placeholder="Enter user name or email">
+                                    <input type="text" class="form-control" id="searchKeyword" placeholder="Enter user name or email">
                                     <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-primary">搜索</button>
+                                        <button id="searchBtn" class="btn btn-primary">搜索</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a href="#" class="btn btn-primary mb-2">添加用户</a>
+                        <a href="#" id="addUserBtn" class="btn btn-primary mb-2">添加用户</a>
                     </div>
                 </div>
 
@@ -130,40 +123,92 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>johndoe@example.com</td>
-                        <td>Admin</td>
-                        <td>Admin</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-sm">详情</a>
-                            <a href="#" class="btn btn-success btn-sm">修改信息</a>
-                            <a href="#" class="btn btn-danger btn-sm">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jane Doe</td>
-                        <td>janedoe@example.com</td>
-                        <td>janedoe@example.com</td>
-                        <td>User</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-sm">详情</a>
-                            <a href="#" class="btn btn-success btn-sm">修改信息</a>
-                            <a href="#" class="btn btn-danger btn-sm">删除</a>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
+                <!-- 添加窗口 -->
+                <div class="modal fade" id="editModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <input type="text" id="editUserId" value="0" hidden>
+                                <h5 class="modal-title" id="editModalLabel">添加用户</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="editName" class="col-form-label">姓名:</label>
+                                        <input type="text" class="form-control" id="editName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editEmail" class="col-form-label">邮箱:</label>
+                                        <input type="text" class="form-control" id="editEmail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editAddress" class="col-form-label">地址:</label>
+                                        <input type="text" class="form-control" id="editAddress">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPhone" class="col-form-label">电话:</label>
+                                        <input type="text" class="form-control" id="editPhone">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="editSaveBtn" class="btn btn-primary">保存</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        onclick="resetForm()">关闭
+                                </button> <!-- modified -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 添加窗口 -->
+                <div class="modal fade" id="addModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addModalLabel">添加用户</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="aName" class="col-form-label">姓名:</label>
+                                        <input type="text" class="form-control" id="aName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="aEmail" class="col-form-label">邮箱:</label>
+                                        <input type="text" class="form-control" id="aEmail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="aAddress" class="col-form-label">地址:</label>
+                                        <input type="text" class="form-control" id="aAddress">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="aPhone" class="col-form-label">电话:</label>
+                                        <input type="text" class="form-control" id="aPhone">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="addSaveBtn" class="btn btn-primary">保存</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        onclick="resetAForm()">关闭
+                                </button> <!-- modified -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <input type="text" id="pageNo" value="1" hidden>
+                <ul class="pagination" id="pageList">
                 </ul>
             </nav>
         </main>

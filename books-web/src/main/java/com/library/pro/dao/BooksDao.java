@@ -57,4 +57,8 @@ public interface BooksDao {
      * @return 数量
      */
     int searchCount(String title, String isbn, Integer category) throws SQLException;
+
+    void updateBookStock(int bookId, int count);
+
+    List<Books> selectOne(String title) throws SQLException;
 }

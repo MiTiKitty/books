@@ -35,12 +35,16 @@ public class BorrowersServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         String path = req.getRequestURI();
-        if (path.endsWith("/all")) {
+        if (path.endsWith("/search")) {
             search(req, resp);
         } else if (path.endsWith("/add")) {
             add(req, resp);
-        } else if (path.endsWith("/search")) {
+        } else if (path.endsWith("/edit")) {
+            edit(req, resp);
+        } else if (path.endsWith("/find")) {
             searchOne(req, resp);
+        } else if (path.endsWith("/info")) {
+            info(req, resp);
         } else {
             resp.sendRedirect("/books/404.html");
         }
@@ -51,8 +55,22 @@ public class BorrowersServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
         String address = req.getParameter("address");
-        Borrowers borrowers = new Borrowers(null, name, phone, email, address);
+        Borrowers borrowers = new Borrowers(null, name, email, phone, address);
         Result result = borrowersService.add(borrowers);
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
+    }
+
+    private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        String name = req.getParameter("name");
+        String phone = req.getParameter("phone");
+        String email = req.getParameter("email");
+        String address = req.getParameter("address");
+        Borrowers borrowers = new Borrowers(Integer.parseInt(id), name, email, phone, address);
+        Result result = borrowersService.edit(borrowers);
         ObjectMapper mapper = new ObjectMapper();
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=utf-8");
@@ -71,7 +89,16 @@ public class BorrowersServlet extends HttpServlet {
 
     private void searchOne(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String keyword = req.getParameter("keyword");
-        Result result = borrowersService.searchOne( keyword);
+        Result result = borrowersService.searchOne(keyword);
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
+    }
+
+    private void info(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        Result result = borrowersService.info(Integer.parseInt(id));
         ObjectMapper mapper = new ObjectMapper();
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=utf-8");

@@ -43,6 +43,8 @@ public class LoansServlet extends HttpServlet {
             add(req, resp);
         } else if (path.endsWith("/edit")) {
             update(req, resp);
+        } else if (path.endsWith("/info")) {
+            info(req, resp);
         } else {
             resp.sendRedirect("/books/404.html");
         }
@@ -63,7 +65,11 @@ public class LoansServlet extends HttpServlet {
     private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
         String bookId = req.getParameter("bookId");
-        Result result = loansService.add(Integer.parseInt(userId), Integer.parseInt(bookId));
+        String startDate = req.getParameter("startDate");
+        String endDate = req.getParameter("endDate");
+        String status = req.getParameter("status");
+        Result result = loansService.add(Integer.parseInt(userId), Integer.parseInt(bookId), Date.valueOf(startDate), Date
+                .valueOf(endDate), Integer.parseInt(status));
         ObjectMapper mapper = new ObjectMapper();
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=utf-8");
@@ -76,7 +82,18 @@ public class LoansServlet extends HttpServlet {
         String borrower = req.getParameter("borrower");
         String startDate = req.getParameter("startDate");
         String endDate = req.getParameter("endDate");
-        Result result = loansService.search(Integer.parseInt(pageNo), title, borrower, Date.valueOf(startDate), Date.valueOf(endDate));
+        Date d1 = StringUtils.isBlank(startDate) ? null : Date.valueOf(startDate);
+        Date d2 = StringUtils.isBlank(endDate) ? null : Date.valueOf(endDate);
+        Result result = loansService.search(Integer.parseInt(pageNo), title, borrower, d1, d2);
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
+    }
+
+    private void info(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        Result result = loansService.info(Integer.parseInt(id));
         ObjectMapper mapper = new ObjectMapper();
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=utf-8");

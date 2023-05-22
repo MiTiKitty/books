@@ -76,6 +76,16 @@
         .my-custom-select {
             width: 80px;
         }
+
+        .tags {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
@@ -99,17 +109,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./users.html">用户管理</a>
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="./notify.html">通知管理</a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./loans.html">借阅管理</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./logs.html">日志管理</a>
                     </li>
                 </ul>
             </div>
@@ -124,10 +126,6 @@
                                 <label class="my-only" for="searchName">书名:</label>
                                 <input type="text" class="form-control my-input" id="searchName" placeholder="斗罗大陆">
                             </div>
-                            <div class="form-group">
-                                <label for="editBookCover" class="col-form-label">封面链接:</label>
-                                <input type="text" class="form-control" id="editBookCover">
-                            </div>
                             <div class="my-col">
                                 <label class="my-only" for="searchIsbn">ISBN号:</label>
                                 <input type="text" class="form-control my-input" id="searchIsbn">
@@ -135,8 +133,6 @@
                             <div class="my-col">
                                 <label class="my-only" for="bookCategory">分类</label>
                                 <select class="my-custom-select" id="bookCategory" required>
-                                    <option selected disabled value="all">全部</option>
-
                                 </select>
                             </div>
                             <div class="my-col">
@@ -166,36 +162,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><img class="cover-img"
-                                             src="https://tse1-mm.cn.bing.net/th/id/OIP-C.8xkbVq_QJ6sorX-ZZx8eQQHaK0?w=195&h=286&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                                             alt="" srcset=""></td>
-                                    <td class="col-md-1">34</td>
-                                    <td class="col-md-1">543</td>
-                                    <td class="col-md-1">546</td>
-                                    <td class="col-md-1">6575</td>
-                                    <td class="col-md-1">567</td>
-                                    <td class="col-md-1">67</td>
-                                    <td class="col-md-1">675</td>
-                                    <td class="col-md-1">765</td>
-                                    <td>
-                                        <div class="my-btn-group">
-                                            <div class="btn-group my-btn">
-                                                <button type="button" class="btn btn-primary">编辑</button>
-                                            </div>
-                                            <div class="btn-group my-btn">
-                                                <button type="button" class="btn btn-danger">删除</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
+                <!-- 编辑窗口 -->
                 <div class="modal fade" id="editModal" role="dialog" aria-labelledby="editModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -214,12 +187,17 @@
                                         <input type="text" class="form-control" id="bookName">
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-form-label">分类:</label>
+                                        <div id="editTags" class="tags">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="author" class="col-form-label">作者:</label>
                                         <input type="text" class="form-control" id="author">
                                     </div>
                                     <div class="form-group">
-                                        <label for="bookCover" class="col-form-label">封面链接:</label>
-                                        <input type="text" class="form-control" id="bookCover">
+                                        <label for="editBookCover" class="col-form-label">封面链接:</label>
+                                        <input type="text" class="form-control" id="editBookCover">
                                     </div>
                                     <div class="form-group">
                                         <label for="publisher" class="col-form-label">出版社:</label>
@@ -231,15 +209,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="isbn" class="col-form-label">ISBN号:</label>
-                                        <input type="text" class="form-control" id="isbn">
+                                        <input type="text" class="form-control" id="isbn" maxlength="20">
                                     </div>
                                     <div class="form-group">
                                         <label for="price" class="col-form-label">价格:</label>
-                                        <input type="text" class="form-control" id="price">
+                                        <input type="number" class="form-control" id="price" min="0">
                                     </div>
                                     <div class="form-group">
                                         <label for="stock" class="col-form-label">修改库存:</label>
-                                        <input type="text" class="form-control" id="stock" value="0">
+                                        <input type="number" class="form-control" id="stock" value="0">
+                                        <input type="number" class="form-control" id="currentStock"
+                                               style="display: none" value="0">
                                     </div>
                                 </form>
                             </div>
@@ -253,6 +233,7 @@
                     </div>
                 </div>
 
+                <!-- 添加窗口 -->
                 <div class="modal fade" id="addModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -270,7 +251,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label">分类:</label>
-                                        <div id="tags" class="tags">
+                                        <div id="addTags" class="tags">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -291,15 +272,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="aisbn" class="col-form-label">ISBN号:</label>
-                                        <input type="text" class="form-control" id="aisbn">
+                                        <input type="text" class="form-control" id="aisbn" maxlength="20">
                                     </div>
                                     <div class="form-group">
                                         <label for="aprice" class="col-form-label">价格:</label>
-                                        <input type="text" class="form-control" id="aprice">
+                                        <input type="number" class="form-control" id="aprice" min="0">
                                     </div>
                                     <div class="form-group">
                                         <label for="atotal" class="col-form-label">总量:</label>
-                                        <input type="text" class="form-control" id="atotal">
+                                        <input type="number" class="form-control" id="atotal" min="1">
                                     </div>
                                 </form>
                             </div>
@@ -316,9 +297,6 @@
             <nav aria-label="Page navigation example">
                 <input type="text" id="pageNo" value="1" hidden>
                 <ul class="pagination" id="pageList">
-                    <li class="page-item"><a class="page-link" href="#" id="p-page">上一页</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="n-page">下一页</a></li>
                 </ul>
             </nav>
         </main>

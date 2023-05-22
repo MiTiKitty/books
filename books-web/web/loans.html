@@ -11,6 +11,7 @@
     <script src="./js/bootstarp.js"></script>
     <!-- 引入EChart.js  -->
     <script src="./js/echat.min.js"></script>
+    <script src="./js/loans.js"></script>
     <style>
         .bor {
             border-bottom: 1px solid #3d3d3d;
@@ -56,6 +57,104 @@
             font-size: 0.8rem;
             padding: 0.25rem 0.5rem;
         }
+
+        .book-list,
+        .borrower-list {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .list-item {
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #345678;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 5px;
+            padding: 3px;
+            margin: 5px;
+        }
+
+        .list-item:hover {
+            cursor: pointer;
+            background-color: #d92a13;
+            border-color: red;
+        }
+
+        .list-item:hover .left-item {
+            color: #fff;
+        }
+
+        .left-item {
+            color: #d92a13;
+            font-weight: 700;
+        }
+
+        .item {
+            color: #69150a;
+            padding: 0 5px;
+        }
+
+        .right-item {
+            font-size: xx-small;
+            color: #cacaca;
+        }
+
+        .edit-loans {
+            width: 750px;
+            display: flex;
+        }
+
+        .info {
+            flex: 1;
+            text-align: center;
+        }
+
+        .book-title {
+            font-size: medium;
+            font-weight: bold;
+        }
+
+        .book-author {
+            text-align: end;
+            color: #565656;
+            font-size: smaller;
+        }
+
+        .book-cover {
+            width: 60%;
+            margin: 10px auto;
+        }
+
+        .book-cover img {
+            width: 100%;
+        }
+
+        .user-info {
+            padding: 0 30px;
+            text-align: start;
+        }
+
+        .user-info div {
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .user-info span {
+            display: block;
+            float: right;
+            font-weight: normal;
+        }
+
+        .user-return-date {
+            margin-top: 15px;
+            display: flex;
+        }
+
+        .current-status {
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
@@ -79,17 +178,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./users.html">用户管理</a>
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="./notify.html">通知管理</a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="./loans.html">借阅管理</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./logs.html">日志管理</a>
                     </li>
                 </ul>
             </div>
@@ -102,7 +193,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-8">
-                                <form>
+                                <div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
@@ -128,22 +219,23 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="borrowTimeEnd" class="form-label">借阅时间止</label>
-                                                <input type="date" class="form-control" id="borrowTimeEnd" name="borrowTimeEnd">
+                                                <input type="date" class="form-control" id="borrowTimeEnd"
+                                                       name="borrowTimeEnd">
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">搜索</button>
-                                </form>
+                                    <button id="search-btn" class="btn btn-primary">搜索</button>
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <button class="btn img-circle btn-default">添加借阅记录</button>
+                                <button id="add-btn" class="btn img-circle btn-default">添加借阅记录</button>
                             </div>
                         </div>
                         <hr>
-                        <table class="table table-striped">
+                        <table id="data-table" class="table table-striped">
                             <thead>
                             <tr>
-                                <th class="col-md-1">ID</th>
+                                <th class="col-md-1"></th>
                                 <th class="col-md-2">图书名称</th>
                                 <th class="col-md-2">借阅人</th>
                                 <th class="col-md-2">借阅时间</th>
@@ -153,33 +245,120 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>《Java编程思想》</td>
-                                <td>张三</td>
-                                <td>2021-01-01</td>
-                                <td>2021-01-31</td>
-                                <td>已归还</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm">修改状态</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>《Effective Java》</td>
-                                <td>李四</td>
-                                <td>2021-02-01</td>
-                                <td>-</td>
-                                <td>借阅中</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm">修改状态</a>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <!-- 编辑窗口 -->
+                <div class="modal fade" id="editModal" role="dialog" aria-labelledby="editModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" style="width: 800px;" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <input type="text" id="editLoansId" value="0" hidden>
+                                <h5 class="modal-title" id="editModalLabel">编辑借阅记录</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="edit-loans">
+                                    <div class="info">
+                                        <div class="book-title" id="bookTitle"></div>
+                                        <div class="book-author" id="bookAuthor"></div>
+                                        <div class="book-cover">
+                                            <img id="bookCover" src="https://img1.doubanio.com/view/subject/s/public/s34477250.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="info user-info">
+                                        <div class="user-name">借阅人：<span id="userName"></span></div>
+                                        <div class="user-phone">电话：<span id="userPhone"></span></div>
+                                        <div class="user-email">邮箱：<span id="userEmail"></span></div>
+                                        <div class="user-loans-date">借阅时间：<span id="showLoansDate"></span></div>
+                                        <div class="user-due-date">应还时间：<span id="showDueDate"></span></div>
+                                    </div>
+                                    <div class="info ">
+                                        <div class="user-return-date">
+                                            <label for="editReturnDate">归还时间：</label>
+                                            <input type="date" name="returnDate" id="editReturnDate">
+                                        </div>
+                                        <div class="current-status">当前状态：<span id="currentStatusSrc"></span></div>
+                                        <select name="" id="edit-status">
+                                            <option value="1">借阅中</option>
+                                            <option value="0">未归还</option>
+                                            <option value="2">已逾期</option>
+                                            <option value="3">已归还</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="editSaveBtn" class="btn btn-primary">保存</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        onclick="resetForm()">关闭
+                                </button> <!-- modified -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 添加窗口 -->
+                <div class="modal fade" id="addModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <input type="text" class="form-control" id="abook-id" style="display: none">
+                                <input type="text" class="form-control" id="auser-id" style="display: none">
+                                <h5 class="modal-title" id="addModalLabel">添加借阅记录</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="book-name" class="col-form-label">图书名:</label>
+                                        <input type="text" class="form-control" id="book-name">
+                                        <div id="book-list"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="auser" class="col-form-label">借阅人:</label>
+                                        <input type="text" class="form-control" id="auser">
+                                        <div id="borrower-list"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="aldate" class="col-form-label">借阅日期:</label>
+                                        <input type="date" class="form-control" id="aldate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addate" class="col-form-label">应还日期:</label>
+                                        <input type="date" class="form-control" id="addate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status" class="col-form-label">状态:</label>
+                                        <select id="status">
+                                            <option value="1" selected>借阅中</option>
+                                            <option value="0">未归还</option>
+                                            <option value="2">已逾期</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="addSaveBtn" class="btn btn-primary">保存</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        onclick="resetAForm()">关闭
+                                </button> <!-- modified -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <nav aria-label="Page navigation example">
+                <input type="text" id="pageNo" value="1" hidden>
+                <ul class="pagination" id="pageList">
+                </ul>
+            </nav>
         </main>
     </div>
 </div>

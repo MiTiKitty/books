@@ -20,4 +20,9 @@ public interface BookCategoryDao {
 
     List<BookCategoryNode> groupByCategory();
 
+    List<BookCategory> selectCategoryListByBookId(int bookId);
+
+    void batchSave(List<BookCategory> list);
+
+    void delByBookId(Integer id);
 }

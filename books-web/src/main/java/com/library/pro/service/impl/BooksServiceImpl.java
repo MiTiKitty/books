@@ -1,15 +1,21 @@
 package com.library.pro.service.impl;
 
+import com.library.pro.dao.BookCategoryDao;
 import com.library.pro.dao.BooksDao;
+import com.library.pro.dao.impl.BookCategoryDaoImpl;
 import com.library.pro.dao.impl.BooksDaoImpl;
+import com.library.pro.model.po.BookCategory;
 import com.library.pro.model.po.Books;
+import com.library.pro.model.vo.BooksInfoVO;
 import com.library.pro.model.vo.PageData;
 import com.library.pro.model.vo.Result;
 import com.library.pro.service.BooksService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @className: BooksServiceImpl <br/>
@@ -22,8 +28,10 @@ public class BooksServiceImpl implements BooksService {
 
     private BooksDao booksDao = new BooksDaoImpl();
 
+    private BookCategoryDao bookCategoryDao = new BookCategoryDaoImpl();
+
     @Override
-    public Result save(Books books) {
+    public Result save(Books books, List<Integer> collect) {
         int result = 0;
         try {
             result = booksDao.insertBook(books);
@@ -31,6 +39,11 @@ public class BooksServiceImpl implements BooksService {
             throwables.printStackTrace();
         }
         if (result > 0) {
+            List<BookCategory> list = new ArrayList<BookCategory>(collect.size());
+            for (Integer id : collect) {
+                list.add(new BookCategory(books.getId(), id));
+            }
+            bookCategoryDao.batchSave(list);
             return new Result(200, "添加成功", null);
         }
         return new Result(500, "添加失败", null);
@@ -73,10 +86,13 @@ public class BooksServiceImpl implements BooksService {
     public Result info(int id) {
         try {
             Books books = booksDao.selectBookById(id);
+            List<BookCategory> category = bookCategoryDao.selectCategoryListByBookId(id);
             if (books == null) {
                 return new Result(500, "查询失败", null);
             }
-            return new Result(200, "查询成功", books);
+            List<Integer> collect = category.stream().map(BookCategory::getCategoryId).collect(Collectors.toList());
+            BooksInfoVO booksInfoVO = new BooksInfoVO(books, collect);
+            return new Result(200, "查询成功", booksInfoVO);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -84,7 +100,7 @@ public class BooksServiceImpl implements BooksService {
     }
 
     @Override
-    public Result edit(Books books) {
+    public Result edit(Books books, List<Integer> collect) {
         int i = 0;
         try {
             i = booksDao.updateBookById(books);
@@ -92,8 +108,25 @@ public class BooksServiceImpl implements BooksService {
             throwables.printStackTrace();
         }
         if (i > 0) {
+            List<BookCategory> list = new ArrayList<BookCategory>(collect.size());
+            for (Integer id : collect) {
+                list.add(new BookCategory(books.getId(), id));
+            }
+            bookCategoryDao.delByBookId(books.getId());
+            bookCategoryDao.batchSave(list);
             return new Result(200, "修改成功", null);
         }
         return new Result(500, "修改失败", null);
+    }
+
+    @Override
+    public Result searchOne(String title) {
+        List<Books> list = Collections.emptyList();
+        try {
+            list = booksDao.selectOne(title);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new Result(200, "", list);
     }
 }

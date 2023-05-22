@@ -3,6 +3,8 @@ package com.library.pro.service;
 import com.library.pro.model.po.Books;
 import com.library.pro.model.vo.Result;
 
+import java.util.List;
+
 /**
  * @className: BooksService <br/>
  * @description: 图书服务接口 <br/>
@@ -17,9 +19,10 @@ public interface BooksService {
      * 添加图书
      *
      * @param books
+     * @param collect
      * @return
      */
-    Result save(Books books);
+    Result save(Books books, List<Integer> collect);
 
     /**
      * 查询
@@ -56,7 +59,10 @@ public interface BooksService {
      * 修改图书
      *
      * @param books
+     * @param collect
      * @return
      */
-    Result edit(Books books);
+    Result edit(Books books, List<Integer> collect);
+
+    Result searchOne(String title);
 }

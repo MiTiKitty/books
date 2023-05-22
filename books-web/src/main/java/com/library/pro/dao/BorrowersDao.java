@@ -1,5 +1,6 @@
 package com.library.pro.dao;
 
+import com.library.pro.model.po.BorrowerNode;
 import com.library.pro.model.po.Borrowers;
 
 import java.sql.SQLException;
@@ -23,4 +24,6 @@ public interface BorrowersDao {
     Borrowers selectBorrowerByName(String name) throws SQLException;
 
     List<Borrowers> selectBorrower(String keyword) throws SQLException;
+
+    BorrowerNode search(int pageNo, String keyword) throws SQLException;
 }

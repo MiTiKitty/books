@@ -15,7 +15,9 @@ public interface LoansService {
 
     Result update(int id, int status, Date date);
 
-    Result add(int userId, int bookId);
+    Result add(int userId, int bookId, Date startDate, Date endDate, int status);
 
     Result search(int pageNo, String title, String borrower, Date startDate, Date endDate);
+
+    Result info(int id);
 }

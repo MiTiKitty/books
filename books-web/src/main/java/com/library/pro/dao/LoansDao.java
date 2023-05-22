@@ -1,8 +1,12 @@
 package com.library.pro.dao;
 
 import com.library.pro.model.po.Loans;
+import com.library.pro.model.po.LoansNode;
+import com.library.pro.model.vo.LoansVO;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @className: LoansDao <br/>
@@ -22,4 +26,8 @@ public interface LoansDao {
     Loans selectLoanBybookId(Integer bookId) throws SQLException;
     //根据借阅者id查询借阅记录
     Loans selectLoanByborrowerId(Integer borrowerId) throws SQLException;
+
+    LoansNode search(int pageNo, String title, String borrower, Date startDate, Date endDate) throws SQLException;
+
+    LoansVO info(int id) throws SQLException;
 }

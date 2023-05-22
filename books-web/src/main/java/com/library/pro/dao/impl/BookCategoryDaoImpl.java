@@ -6,6 +6,7 @@ import com.library.pro.model.po.BookCategoryNode;
 import com.library.pro.utils.DruidUtils;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.BeanProcessor;
+import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -61,6 +62,42 @@ public class BookCategoryDaoImpl implements BookCategoryDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public List<BookCategory> selectCategoryListByBookId(int bookId) {
+        String sql  = "select * from book_category where book_id =?";
+        try {
+            BeanListHandler<BookCategory> handler = new BeanListHandler<>(BookCategory.class, new BasicRowProcessor(new GenerousBeanProcessor()));
+            return queryRunner.query(sql, handler, bookId);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public void batchSave(List<BookCategory> list) {
+        String sql  = "insert into book_category (category_id, book_id) values (?, ?)";
+        try {
+            Object[][] params = new Object[list.size()][];
+            for (int i = 0; i < list.size(); i++) {
+                params[i] = new Object[]{list.get(i).getCategoryId(), list.get(i).getBookId()};
+            }
+            queryRunner.batch(sql, params);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delByBookId(Integer id) {
+        String sql = "DELETE FROM book_category WHERE book_id = ?";
+        try {
+            queryRunner.update(sql, id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }

@@ -6,11 +6,13 @@ import com.library.pro.utils.DruidUtils;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -33,7 +35,17 @@ public class BooksDaoImpl implements BooksDao {
         Object[] params = {books.getTitle(), books.getAuthor(),
                 books.getCoverUrl(), books.getPublisher(), books.getPublicationDate(),
                 books.getIsbn(), books.getPrice(), books.getTotal(), books.getCurrentStock()};
-        return queryRunner.update(sql, params);
+        // 创建 ScalarHandler 对象
+        ScalarHandler<BigInteger> scalarHandler = new ScalarHandler<>();
+        // 将 ScalarHandler 对象传递给 insert() 方法
+        BigInteger bookId = queryRunner.insert(sql, scalarHandler, params);
+        if (bookId == null) {
+            return -1;
+        }
+        // 将主键值设置到 Books 对象的 id 属性中
+        books.setId(bookId.intValue());
+        // 返回自增长生成的主键值
+        return bookId.intValue();
     }
 
     @Override
@@ -75,11 +87,11 @@ public class BooksDaoImpl implements BooksDao {
         }
         List<Books> books = null;
         if (category == null) {
-            String sql = "SELECT b.* FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') limit ?, ?";
+            String sql = "SELECT DISTINCT b.* FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') limit ?, ?";
             BeanListHandler<Books> handler = new BeanListHandler<Books>(Books.class, new BasicRowProcessor(new GenerousBeanProcessor()));
             books = queryRunner.query(sql, handler, title, isbn, (pageNo - 1) * 10, 10);
         } else {
-            String sql = "SELECT b.* FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') and bc.category_id = ? limit ?, ?";
+            String sql = "SELECT DISTINCT b.* FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') and bc.category_id = ? limit ?, ?";
             BeanListHandler<Books> handler = new BeanListHandler<Books>(Books.class, new BasicRowProcessor(new GenerousBeanProcessor()));
             books = queryRunner.query(sql, handler, title, isbn, category, (pageNo - 1) * 10, 10);
         }
@@ -96,12 +108,44 @@ public class BooksDaoImpl implements BooksDao {
         }
         Long count = 0L;
         if (category == null) {
-            String sql = "SELECT count(*) FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%')";
+            String sql = "SELECT COUNT(*)\n" +
+                    "FROM books b " +
+                    "WHERE b.title LIKE CONCAT('%', ?, '%') " +
+                    "AND b.author LIKE CONCAT('%', ?, '%') " +
+                    "AND EXISTS (" +
+                    "  SELECT * FROM book_category bc " +
+                    "  WHERE bc.book_id = b.id " +
+                    ");";
             count = queryRunner.query(sql, new ScalarHandler<>(), title, isbn);
         } else {
-            String sql = "SELECT count(*) FROM books b inner join book_category bc on b.id = bc.book_id where b.title like concat('%', ? , '%') and b.author like concat('%', ? , '%') and bc.category_id = ?";
+            String sql = "SELECT COUNT(*)\n" +
+                    "FROM books b " +
+                    "WHERE b.title LIKE CONCAT('%', ?, '%') " +
+                    "AND b.author LIKE CONCAT('%', ?, '%') " +
+                    "AND EXISTS (" +
+                    "  SELECT * FROM book_category bc " +
+                    "  WHERE bc.book_id = b.id " +
+                    "  and bc.category_id in (?)" +
+                    ");";
             count = queryRunner.query(sql, new ScalarHandler<>(), title, isbn, category);
         }
         return count.intValue();
+    }
+
+    @Override
+    public void updateBookStock(int id, int count) {
+        String sql = "UPDATE books SET current_stock = current_stock + ? WHERE id = ?";
+        try {
+            queryRunner.update(sql, count, id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Books> selectOne(String title) throws SQLException {
+        String sql = "SELECT id, title, author, current_stock FROM books WHERE (title like ? or author like ?) and current_stock > 0 limit 10";
+        BeanListHandler<Books> handler = new BeanListHandler<Books>(Books.class, new BasicRowProcessor(new GenerousBeanProcessor()));
+        return queryRunner.query(sql, handler, "%" + title + "%", "%" + title + "%");
     }
 }
