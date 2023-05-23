@@ -77,14 +77,58 @@
             width: 80px;
         }
 
-        .tags {
+        .my-f {
+            width: 600px;
+        }
+
+        .my-f .form-group {
+            min-height: 40px;
+            line-height: 40px;
+        }
+
+        .d-f {
             display: flex;
-            justify-content: space-between;
+        }
+
+        .d-f .tags input {
+            width: auto;
+            height: 40px;
+            margin: 0 5px;
+        }
+
+        .my-f input {
+            width: 80%;
+            float: right;
+        }
+
+        .my-f .form-group label {
+            width: 20%;
+        }
+
+        .tags {
+            width: 80%;
+            float: right;
+            display: flex;
             flex-wrap: wrap;
+        }
+
+        .my-f .form-group .tags label {
+            width: auto;
         }
 
         .tag {
             margin: 5px;
+        }
+
+        .img-box {
+            width: 150px;
+            height: 220px;
+            margin: 10px auto;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -180,13 +224,13 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body my-f">
                                 <form>
                                     <div class="form-group">
                                         <label for="bookName" class="col-form-label">书名:</label>
                                         <input type="text" class="form-control" id="bookName">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group d-f">
                                         <label class="col-form-label">分类:</label>
                                         <div id="editTags" class="tags">
                                         </div>
@@ -196,12 +240,15 @@
                                         <input type="text" class="form-control" id="author">
                                     </div>
                                     <div class="form-group">
+                                        <label for="publisher" class="col-form-label">出版社:</label>
+                                        <input type="text" class="form-control" id="publisher">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="editBookCover" class="col-form-label">封面链接:</label>
                                         <input type="text" class="form-control" id="editBookCover">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="publisher" class="col-form-label">出版社:</label>
-                                        <input type="text" class="form-control" id="publisher">
+                                    <div class="img-box">
+                                        <img id="show-cover" src="" alt="">
                                     </div>
                                     <div class="form-group">
                                         <label for="date" class="col-form-label">出版日期:</label>
@@ -243,20 +290,11 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body my-f">
                                 <form>
                                     <div class="form-group">
                                         <label for="abookName" class="col-form-label">书名:</label>
                                         <input type="text" class="form-control" id="abookName">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">分类:</label>
-                                        <div id="addTags" class="tags">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="abookCover" class="col-form-label">封面链接:</label>
-                                        <input type="text" class="form-control" id="abookCover">
                                     </div>
                                     <div class="form-group">
                                         <label for="aauthor" class="col-form-label">作者:</label>
@@ -265,6 +303,18 @@
                                     <div class="form-group">
                                         <label for="apublisher" class="col-form-label">出版社:</label>
                                         <input type="text" class="form-control" id="apublisher">
+                                    </div>
+                                    <div class="form-group d-f">
+                                        <label class="col-form-label">分类:</label>
+                                        <div id="addTags" class="tags">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="abookCover" class="col-form-label">封面链接:</label>
+                                        <input type="text" class="form-control" id="abookCover">
+                                    </div>
+                                    <div class="img-box">
+                                        <img id="add-show-cover" src="" alt="">
                                     </div>
                                     <div class="form-group">
                                         <label for="adate" class="col-form-label">出版日期:</label>

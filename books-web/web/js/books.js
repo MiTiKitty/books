@@ -4,6 +4,16 @@ $(document).ready(function () {
     searchCategory()
     searchPage()
 
+    $('#editBookCover').on('blur', () => {
+        let coverUrl = $('#editBookCover').val()
+        $('#show-cover').attr('src', coverUrl)
+    })
+
+    $('#abookCover').on('blur', () => {
+        let coverUrl = $('#abookCover').val()
+        $('#add-show-cover').attr('src', coverUrl)
+    })
+
     // 发起编辑修改请求
     $('#editSaveBtn').click(function () {
         let box = $('#editTags input[type=checkbox]')
@@ -127,6 +137,7 @@ $(document).ready(function () {
         $('#aisbn').val('');
         $('#aprice').val('');
         $('#atotal').val('');
+        $('#add-show-cover').attr('src', '');
         $('#addTags input[type=checkbox]').prop('checked', false);
     }
 
@@ -211,6 +222,7 @@ $(document).ready(function () {
                                         let response = theP.book
                                         $('#editBookId').val(response.id);
                                         $('#editBookCover').val(response.coverUrl);
+                                        $('#show-cover').attr('src', response.coverUrl);
                                         $('#bookName').val(response.title);
                                         $('#author').val(response.author);
                                         $('#publisher').val(response.publisher);
