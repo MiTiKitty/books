@@ -45,7 +45,7 @@ public class ShowTableDaoImpl implements ShowTableDao {
                 " LEFT JOIN ( " +
                 " SELECT " +
                 "  DATE_FORMAT( FROM_UNIXTIME( loan_date / 1000 ), '%Y-%m' ) AS MONTH, " +
-                "  SUM( CASE WHEN `status` = 1 OR `status` = 2 OR `status` = 3 THEN 1 ELSE 0 END ) AS borrow_count, " +
+                "  SUM( CASE WHEN `status` = 1 OR `status` = 2 OR `status` = 3 OR `status` = 0 THEN 1 ELSE 0 END ) AS borrow_count, " +
                 "  SUM( CASE WHEN `status` = 3 THEN 1 ELSE 0 END ) AS return_count, " +
                 "  IFNULL( " +
                 "   SUM( CASE WHEN `status` = 3 THEN 1 ELSE 0 END ) * 100 / SUM( CASE WHEN `status` = 1 OR `status` = 2 OR `status` = 3 THEN 1 ELSE 0 END ), " +

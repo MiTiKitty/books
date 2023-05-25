@@ -32,5 +32,4 @@ public interface UsersService {
      * @return 成功与否
      */
     Boolean registerUser(RegisterUserDto dto);
-
 }

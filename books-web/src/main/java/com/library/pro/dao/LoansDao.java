@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @className: LoansDao <br/>
- * @description: 借阅持久层接口 <br/>
+ * @description: 借阅记录持久层接口 <br/>
  * @author: xh <br/>
  * @date: 2023/05/21 <br/>
  * @version: 1.0.0 <br/>
