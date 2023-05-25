@@ -57,6 +57,17 @@
             font-size: 0.8rem;
             padding: 0.25rem 0.5rem;
         }
+
+        .page-nav {
+            position: relative;
+        }
+
+        .pagination {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -94,7 +105,7 @@
 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <form>
+                        <div>
                             <div class="form-group">
                                 <label for="searchKeyword">搜索用户</label>
                                 <div class="input-group">
@@ -104,7 +115,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="col-md-6 text-right">
                         <a href="#" id="addUserBtn" class="btn btn-primary mb-2">添加用户</a>
@@ -206,7 +217,7 @@
                     </div>
                 </div>
             </div>
-            <nav aria-label="Page navigation example">
+            <nav class="page-nav" aria-label="Page navigation example">
                 <input type="text" id="pageNo" value="1" hidden>
                 <ul class="pagination" id="pageList">
                 </ul>

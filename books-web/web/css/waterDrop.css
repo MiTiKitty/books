@@ -1,0 +1,109 @@
+#categoryListRow {
+    position: relative;
+    padding: 50px 40px;
+    display: flex;
+    text-align: center;
+    justify-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-wrap: wrap;
+    gap: 40px 60px;
+}
+
+#categoryListRow .drop {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05), 25px 25px 40px rgba(0, 0, 0, 0.05), 25px 30px 40px rgba(0, 0, 0, 0.05), 20px 15px 30px rgba(255, 255, 255, 0.05);
+    transition: 0.5s all;
+}
+
+.child1 {
+    border-radius: 29% 71% 38% 62% / 50% 42% 58% 50%;
+}
+
+.child2 {
+    border-radius: 49% 51% 49% 51% / 67% 64% 36% 33%;
+}
+
+.child3 {
+    border-radius: 29% 61% 54% 76% / 49% 33% 67% 51%;
+}
+
+#categoryListRow.drop::before {
+    position: absolute;
+    top: 55px;
+    left: 75px;
+    content: '';
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    opacity: 0.8;
+}
+
+#categoryListRow .drop::after {
+    position: absolute;
+    top: 95px;
+    left: 105px;
+    content: '';
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    opacity: 0.8;
+}
+
+#categoryListRow .drop:hover {
+    border-radius: 50%;
+}
+
+#categoryListRow .drop .content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+}
+
+#categoryListRow .drop .content h2 {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    line-height: 80px;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+    display: flex;
+    background-color: #eff1f1;
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1), -2px -5px 10px rgb(255, 255, 255), 15px 15px 10px rgba(0, 0, 0, 0.05), 15px 10px 15px rgba(0, 0, 0, 0.025);
+    color: var(--clr);
+    font-size: 2em;
+}
+
+#categoryListRow .drop .content a {
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+    color: var(--cf);
+    padding: 10px 40px;
+    border-radius: 20px;
+    background-color: var(--clr);
+    opacity: 0.78;
+    font-size: 1rem;
+    text-shadow: 2px 3px 4px rgba(255, 255, 255, 0.05);
+    transition: 0.5s all;
+}
+
+#categoryListRow .drop .content a:hover {
+    opacity: 1;
+}
+
+#categoryListRow .drop .content p.p-title {
+    font-weight: bold;
+    font-size: large;
+}

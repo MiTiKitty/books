@@ -179,6 +179,9 @@ $(document).ready(function () {
         // 获取分页视图元素
         var pagination = $('#pageList');
         $('#pageList li').remove();
+        if (theTotalPage == 0) {
+            return
+        }
         // 获取上一页和下一页链接元素
         var prevLink = $('#p-page');
         var nextLink = $('#n-page');

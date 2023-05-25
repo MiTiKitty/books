@@ -155,6 +155,17 @@
         .current-status {
             margin: 15px 0;
         }
+
+        .page-nav {
+            position: relative;
+        }
+
+        .pagination {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -354,7 +365,7 @@
                     </div>
                 </div>
             </div>
-            <nav aria-label="Page navigation example">
+            <nav class="page-nav" aria-label="Page navigation example">
                 <input type="text" id="pageNo" value="1" hidden>
                 <ul class="pagination" id="pageList">
                 </ul>

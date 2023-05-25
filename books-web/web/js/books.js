@@ -1,6 +1,20 @@
 let theTotalPage = 1;
+let theC = 'all';
 
 $(document).ready(function () {
+    // 拿到url中的c参数
+    let url = window.location.href;
+    let c = url.substring(url.indexOf('c='));
+    if (c) {
+        c = c.split('&');
+        for (let i = 0; i < c.length; i++) {
+            c[i] = c[i].split('=');
+        }
+        if (c[0][0] == 'c') {
+            theC = c[0][1];
+        }
+    }
+
     searchCategory()
     searchPage()
 
@@ -156,7 +170,7 @@ $(document).ready(function () {
     $('#searchIsbn').on('input', function () {
         var input = $(this).val();
         $('tbody tr').each(function () {
-            var isbn = $(this).find('td:nth-child(7)').text();
+            var isbn = $(this).find('td:nth-child(4)').text();
             if (isbn.indexOf(input) === -1) {
                 $(this).hide();
             } else {
@@ -171,6 +185,10 @@ $(document).ready(function () {
 
     // 发起搜索请求
     function searchPage(is=true) {
+        let ca = $('#bookCategory').val() == 'all' ? null : $('#bookCategory').val()
+        if (theC != 'all' && ca == null) {
+            ca = theC
+        }
         $.ajax({
             url: '/books/book/search',
             type: 'POST',
@@ -178,7 +196,7 @@ $(document).ready(function () {
                 pageNo: is ? 1 : $('#pageNo').val(),
                 name: $('#searchName').val(),
                 isbn: $('#searchIsbn').val(),
-                category: $('#bookCategory').val() == 'all' ? null : $('#bookCategory').val()
+                category: ca
             },
             dataType: 'json',
             success: function (rep) {
@@ -286,6 +304,9 @@ $(document).ready(function () {
         // 获取分页视图元素
         var pagination = $('#pageList');
         $('#pageList li').remove();
+        if (theTotalPage == 0) {
+            return
+        }
         // 获取上一页和下一页链接元素
         var prevLink = $('#p-page');
         var nextLink = $('#n-page');
@@ -350,10 +371,10 @@ $(document).ready(function () {
                 if (res.code == 200) {
                     let categories = res.data
                     let e = ``;
-                    let category = `<option selected value="all">全部</option>`;
+                    let category = `<option ${theC == 'all' ? 'selected' : ''} value="all">全部</option>`;
                     $.each(categories, function (index, v) {
                         e += `<label><input type="checkbox" name="category" value="${v.id}">${v.name}</label>`
-                        category += `<option value="${v.id}">${v.name}</option>`
+                        category += `<option ${theC == v.id ? 'selected' : ''} value="${v.id}">${v.name}</option>`
                     })
                     $('#bookCategory option').remove()
                     $('.tags label').remove()
