@@ -19,6 +19,17 @@ public class RegisterUserDto {
 
     private String address;
 
+    public RegisterUserDto() {
+    }
+
+    public RegisterUserDto(String username, String password, String email, String phone, String address) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public String getUsername() {
         return username;
     }
