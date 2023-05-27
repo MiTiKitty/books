@@ -26,6 +26,7 @@
                 let email = $("#email").val();
                 let phone = $("#phone").val();
                 let address = $("#address").val();
+                password = encrypt(password)
                 $.ajax({
                     type: "POST",
                     url: "/books/users/register",
@@ -47,6 +48,16 @@
                     }
                 })
             })
+
+            function encrypt(password) {
+                let encrypted = '';
+                for (let i = 0; i < password.length; i++) {
+                    let num = password.charCodeAt(i);
+                    num = num + 3; // 加密算法：将每个字符的Unicode码值加上3
+                    encrypted += String.fromCharCode(num);
+                }
+                return encrypted;
+            }
         })
     </script>
 </head>

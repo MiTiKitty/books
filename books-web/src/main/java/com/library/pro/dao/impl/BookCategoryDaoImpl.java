@@ -36,7 +36,6 @@ public class BookCategoryDaoImpl implements BookCategoryDao {
             throwables.printStackTrace();
             return 0;
         }
-
     }
 
     @Override

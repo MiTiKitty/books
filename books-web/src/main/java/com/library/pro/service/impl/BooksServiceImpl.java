@@ -71,7 +71,6 @@ public class BooksServiceImpl implements BooksService {
             return new Result(200, "查询成功", pageData);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-
         }
         return new Result(500, "查询失败", null);
     }

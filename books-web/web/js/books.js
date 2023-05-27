@@ -218,15 +218,12 @@ $(document).ready(function () {
                         row.append($("<td>").text(value.currentStock));
                         var btnGroup = $("<div class='my-btn-group'>");
                         var editBtn = $("<button type='button' class='btn btn-primary' value='" + value.id + "'>").text("编辑");
-                        var deleteBtn = $("<button type='button' class='btn btn-danger' value='" + value.id + "'>").text("删除");
                         var btnGroupDiv = $("<div class='btn-group my-btn'>");
                         btnGroupDiv.append(editBtn);
                         btnGroup.append(btnGroupDiv);
                         btnGroupDiv = $("<div class='btn-group my-btn'>");
-                        btnGroupDiv.append(deleteBtn);
                         btnGroup.append(btnGroupDiv);
                         row.append($("<td>").append(btnGroup));
-
                         // 发起编辑请求
                         editBtn.click(function () {
                             resetForm();
@@ -265,23 +262,6 @@ $(document).ready(function () {
                                     console.log(error);
                                 }
                             });
-                        });
-
-                        // 绑定删除事件
-                        deleteBtn.click(function () {
-                            if (confirm("确定删除吗？")) {
-                                $.ajax({
-                                    url: "/books/book/del",
-                                    type: "POST",
-                                    data: {id: value.id},
-                                    success: function (response) {
-                                        console.log(response);
-                                    },
-                                    error: function (error) {
-                                        console.log(error);
-                                    }
-                                });
-                            }
                         });
                         table.append(row);
                     });

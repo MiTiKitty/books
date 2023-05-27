@@ -29,7 +29,6 @@ public class CategoriesDaoImpl implements CategoriesDao {
             e.printStackTrace();
             return 0;
         }
-
     }
 
     @Override
