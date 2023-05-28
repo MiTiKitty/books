@@ -227,54 +227,25 @@ $(document).ready(() => {
     $('#data-table').on('click', 'a[name=del]', function() {
         $('#editReturnDate').val('')
         let id = this.getAttribute('the-id');
-        let status = this.getAttribute('the-status');
-        if (status != 3) {
+        let status = this.getAttribute('the-type');
+        if (status != '3') {
             alert('不能删除未归还的借阅')
             return
         }
-        $.ajax({
-            type: 'POST',
-            url: '/books/loans/del',
-            data: {
-                id: id
-            },
-            success: function (res) {
-                if (res.code == 200) {
-                    let v = res.data
-                    $('#editLoansId').val(v.id)
-                    $('#bookTitle').text(v.bookName)
-                    $('#bookAuthor').text('——' + v.author)
-                    $('#bookCover').prop('src', v.coverUrl)
-                    $('#userName').text(v.borrower)
-                    $('#userPhone').text(v.userPhone)
-                    $('#userEmail').text(v.userEmail)
-                    $('#showLoansDate').text(formatDate(v.loanDate))
-                    $('#showDueDate').text(formatDate(v.dueDate))
-                    let s = '未归还'
-                    if (v.status == 0) {
-                        s = '未归还'
-                    } else if (v.status == 1) {
-                        s = '借阅中'
-                    } else if (v.status == 2) {
-                        s = '已逾期'
-                    } else if (v.status == 3) {
-                        s = '已归还'
+        if (window.confirm('确定要删除该记录吗')) {
+            $.ajax({
+                type: 'POST',
+                url: '/books/loans/del',
+                data: {
+                    id: id
+                },
+                success: function (res) {
+                    if (res.code == 200) {
+                        alert(res.message)
                     }
-                    $('#currentStatusSrc').text(s)
-                    if (v.returnDate != null) {
-                        $('#editReturnDate').val(formatDate(v.returnDate))
-                    }
-                    let op = $('#edit-status option');
-                    $.each(op, (index, value) => {
-                        let r = $(value)
-                        if (r.val() == v.status) {
-                            r.prop('selected', true)
-                        }
-                    })
-                    $('#editModal').modal('show')
                 }
-            }
-        })
+            })
+        }
     })
 
     // 发起修改请求
