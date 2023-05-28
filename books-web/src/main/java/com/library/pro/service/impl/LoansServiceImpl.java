@@ -125,4 +125,19 @@ public class LoansServiceImpl implements LoansService {
         }
         return new Result(200, "", vo);
     }
+
+    @Override
+    public Result del(int id) {
+        int i = 0;
+        try {
+            i = loansDao.delById(id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (i > 0) {
+            return new Result(200, "删除成功", null);
+        } else {
+            return new Result(500, "删除失败", null);
+        }
+    }
 }

@@ -45,6 +45,8 @@ public class LoansServlet extends HttpServlet {
             update(req, resp);
         } else if (path.endsWith("/info")) {
             info(req, resp);
+        } else if (path.endsWith("/del")) {
+            del(req, resp);
         } else {
             resp.sendRedirect("/books/404.html");
         }
@@ -94,6 +96,15 @@ public class LoansServlet extends HttpServlet {
     private void info(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         Result result = loansService.info(Integer.parseInt(id));
+        ObjectMapper mapper = new ObjectMapper();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json; charset=utf-8");
+        mapper.writeValue(resp.getWriter(), result);
+    }
+
+    private void del(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        Result result = loansService.del(Integer.parseInt(id));
         ObjectMapper mapper = new ObjectMapper();
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=utf-8");

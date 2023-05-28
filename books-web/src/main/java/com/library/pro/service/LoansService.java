@@ -20,4 +20,6 @@ public interface LoansService {
     Result search(int pageNo, String title, String borrower, Date startDate, Date endDate);
 
     Result info(int id);
+
+    Result del(int id);
 }

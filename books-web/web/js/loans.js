@@ -160,6 +160,7 @@ $(document).ready(() => {
                                 <td>${item.status == 0 ? '未归还' : (item.status == 1 ? '借阅中' : (item.status == 2 ? '已逾期' : (item.status == 3 ? '已归还' : '未知状态')))}</td>
                                 <td>
                                     <a href="#" the-id="${item.id}" name="edit" class="btn btn-primary btn-sm">修改状态</a>
+                                    <a href="#" the-id="${item.id}" the-type="${item.status}" name="del" class="btn btn-danger btn-sm">删除</a>
                                 </td>
                             </tr>
                              `
@@ -180,6 +181,60 @@ $(document).ready(() => {
         $.ajax({
             type: 'POST',
             url: '/books/loans/info',
+            data: {
+                id: id
+            },
+            success: function (res) {
+                if (res.code == 200) {
+                    let v = res.data
+                    $('#editLoansId').val(v.id)
+                    $('#bookTitle').text(v.bookName)
+                    $('#bookAuthor').text('——' + v.author)
+                    $('#bookCover').prop('src', v.coverUrl)
+                    $('#userName').text(v.borrower)
+                    $('#userPhone').text(v.userPhone)
+                    $('#userEmail').text(v.userEmail)
+                    $('#showLoansDate').text(formatDate(v.loanDate))
+                    $('#showDueDate').text(formatDate(v.dueDate))
+                    let s = '未归还'
+                    if (v.status == 0) {
+                        s = '未归还'
+                    } else if (v.status == 1) {
+                        s = '借阅中'
+                    } else if (v.status == 2) {
+                        s = '已逾期'
+                    } else if (v.status == 3) {
+                        s = '已归还'
+                    }
+                    $('#currentStatusSrc').text(s)
+                    if (v.returnDate != null) {
+                        $('#editReturnDate').val(formatDate(v.returnDate))
+                    }
+                    let op = $('#edit-status option');
+                    $.each(op, (index, value) => {
+                        let r = $(value)
+                        if (r.val() == v.status) {
+                            r.prop('selected', true)
+                        }
+                    })
+                    $('#editModal').modal('show')
+                }
+            }
+        })
+    })
+
+    // 删除
+    $('#data-table').on('click', 'a[name=del]', function() {
+        $('#editReturnDate').val('')
+        let id = this.getAttribute('the-id');
+        let status = this.getAttribute('the-status');
+        if (status != 3) {
+            alert('不能删除未归还的借阅')
+            return
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/books/loans/del',
             data: {
                 id: id
             },

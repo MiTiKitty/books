@@ -113,4 +113,10 @@ public class LoansDaoImpl implements LoansDao {
                 + "WHERE b.id = ?";
         return queryRunner.query(sql, new BeanHandler<>(LoansVO.class, new BasicRowProcessor(new GenerousBeanProcessor())), id);
     }
+
+    @Override
+    public int delById(int id) throws SQLException {
+        String sql = "delete from loans where id = ?";
+        return queryRunner.update(sql, id);
+    }
 }

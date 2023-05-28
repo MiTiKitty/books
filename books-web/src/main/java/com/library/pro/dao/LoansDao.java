@@ -30,4 +30,6 @@ public interface LoansDao {
     LoansNode search(int pageNo, String title, String borrower, Date startDate, Date endDate) throws SQLException;
 
     LoansVO info(int id) throws SQLException;
+
+    int delById(int id) throws SQLException;
 }
